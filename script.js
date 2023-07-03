@@ -45,4 +45,6 @@ function createCharacter() {
 
 function startGame() {
   createCharacter()
+  board.style.backgroundImage = 'url(./assets/backgrounds/Parallax_No_Car.gif)'
+  board.style.backgroundSize = 'cover'
 }
