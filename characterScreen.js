@@ -1,5 +1,5 @@
 const characterScreen = `
-  <h3>Choose your character</h3>
+  <h3 class="title">Choose your character</h3>
   <main>
     <div class="character-select" style="background-color: blue;"></div>
     <div class="character-select" style="background-color: purple;"></div>

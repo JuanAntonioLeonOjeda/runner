@@ -11,6 +11,8 @@ startButton.addEventListener('click', () => {
   for (let i = 0; i < options.length; i++) {
     options[i].addEventListener('click', () => {
       character = i
+      removeChildren(board)
+      startGame()
     })
   }
 })
@@ -23,4 +25,24 @@ function removeChildren(element) {
 
 function loadCharacterScreen() {
   board.innerHTML = characterScreen
+}
+
+function createCharacter() {
+  const player = document.createElement('div')
+  switch (character) {
+    case 0:
+      player.classList.add('juanan')
+      break
+    case 1:
+      player.classList.add('tati')
+      break
+    case 2:
+      player.classList.add('kimchi')
+      break
+  }
+  board.appendChild(player)
+}
+
+function startGame() {
+  createCharacter()
 }
