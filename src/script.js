@@ -1,4 +1,5 @@
 import { characterScreen } from "./characterScreen.js"
+import { Player } from './player.js'
 
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
@@ -10,7 +11,17 @@ startButton.addEventListener('click', () => {
   const options = document.getElementsByClassName('character-select')
   for (let i = 0; i < options.length; i++) {
     options[i].addEventListener('click', () => {
-      character = i
+      switch (i) {
+        case 0:
+          character = 'tati'
+          break
+        case 1:
+          character = 'juanan'
+          break
+        case 2:
+          character = 'kimchi'
+          break
+      }
       removeChildren(board)
       startGame()
     })
@@ -27,24 +38,9 @@ function loadCharacterScreen() {
   board.innerHTML = characterScreen
 }
 
-function createCharacter() {
-  const player = document.createElement('div')
-  switch (character) {
-    case 0:
-      player.classList.add('juanan')
-      break
-    case 1:
-      player.classList.add('tati')
-      break
-    case 2:
-      player.classList.add('kimchi')
-      break
-  }
-  board.appendChild(player)
-}
-
 function startGame() {
-  createCharacter()
+  const player = new Player(character, board)
+  player.drawPlayer()
   board.style.backgroundImage = 'url(./assets/backgrounds/Parallax_No_Car.gif)'
   board.style.backgroundSize = 'cover'
 }
