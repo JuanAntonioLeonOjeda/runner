@@ -5,12 +5,13 @@ const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
 let character = ''
 
-startButton.addEventListener('click', () => {
+startButton.addEventListener('click', (e) => {
   removeChildren(board)
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')
   for (let i = 0; i < options.length; i++) {
-    options[i].addEventListener('click', () => {
+    options[i].addEventListener('click', (e) => {
+      e.stopPropagation()
       switch (i) {
         case 0:
           character = 'tati'
@@ -38,9 +39,23 @@ function loadCharacterScreen() {
   board.innerHTML = characterScreen
 }
 
+function loadBackground(source) {
+  board.style.backgroundImage = `url(./assets/backgrounds/${source}.gif)`
+  board.style.backgroundSize = 'cover'
+}
+
 function startGame() {
   const player = new Player(character, board)
   player.drawPlayer()
-  board.style.backgroundImage = 'url(./assets/backgrounds/Parallax_No_Car.gif)'
-  board.style.backgroundSize = 'cover'
+  loadBackground('road')
+  
+  let gameTimer = setInterval(() => {
+    player.jump()
+  }, 100)
+
+  window.addEventListener('click', () => {
+    if (!player.jumping) {
+      player.jumping = true
+    }
+  })
 }
