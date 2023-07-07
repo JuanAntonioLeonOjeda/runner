@@ -1,9 +1,12 @@
 import { characterScreen } from "./characterScreen.js"
 import { Player } from './player.js'
+import { Enemy } from './enemy.js'
 
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
-let character = ''
+let character
+let speed = 10
+let enemies = []
 
 startButton.addEventListener('click', (e) => {
   removeChildren(board)
@@ -51,11 +54,27 @@ function startGame() {
   
   let gameTimer = setInterval(() => {
     player.jump()
+    enemies.forEach(enemy => {
+      enemy.move()
+      console.log(enemy.playerCollision(player))
+    })
   }, 100)
 
-  window.addEventListener('click', () => {
+  let enemyTimer = setInterval(() => {
+    const enemy = new Enemy(375, speed, board)
+    enemies.push(enemy)
+    enemy.drawEnemy()
+  }, 3000)
+
+  window.addEventListener('mousedown', () => {
     if (!player.jumping) {
       player.jumping = true
     }
   })
+
+  /*window.addEventListener('mouseup', () => {
+    if (player.jumping) {
+      player.jumping = false
+    }
+  })*/
 }

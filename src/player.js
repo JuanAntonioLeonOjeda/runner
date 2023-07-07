@@ -6,6 +6,7 @@ function Player(character, parent) {
   this.force = 60
   this.height = 50
   this.width = 50
+  this.isDead = false
   this.sprite = document.createElement('div')
   this.sprite.classList.add('player')
   this.sprite.style.backgroundImage = `url(./assets/characters/${character}/main.jpg)`
