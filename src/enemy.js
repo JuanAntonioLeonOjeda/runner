@@ -1,4 +1,4 @@
-function Enemy (y, speed, parent) {
+function Enemy (y, speed, parent, player) {
   let self = this
   this.x = 750
   this.y = y
@@ -15,15 +15,31 @@ function Enemy (y, speed, parent) {
   }
 
   this.move = function () {
-    this.x -= this.speed
-    this.sprite.style.left = `${this.x}px`
+    if (self.playerCollision()) {
+      alert('Game Over')
+    }
+
+    self.x -= self.speed
+    self.sprite.style.left = `${self.x}px`
+
+    if (self.x <= 0) {
+      self.removeEnemy()
+    }
   }
 
-  this.playerCollision = function (player) {
+  this.playerCollision = function () {
     return self.x <= player.x + player.width &&
-           self.y <= player.y + player.height ||
+           self.x + self.width >= player.x &&
+           self.y <= player.y + player.height &&
            self.y + self.height >= player.y
   }
+
+  this.removeEnemy = function () {
+    parent.removeChild(this.sprite)
+    clearInterval(this.timerId)
+  }
+
+  this.timerId = setInterval(this.move, 100)
 }
 
 export { Enemy }

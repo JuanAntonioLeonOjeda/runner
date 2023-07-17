@@ -3,7 +3,7 @@ function Player(character, parent) {
   this.x = 50
   this.y = 350
   this.jumping = false
-  this.force = 60
+  this.force = character === 'kimchi' ? 110 : 80
   this.height = 50
   this.width = 50
   this.isDead = false
@@ -23,12 +23,13 @@ function Player(character, parent) {
       this.force -= this.force * 0.6
       this.sprite.style.top = `${this.y}px`
     } else if (!this.collideFloor()) {
-      this.y += 25
+      this.y += character === 'tati' ? 10 : 25
       this.sprite.style.top = `${this.y}px`
     } else {
       this.jumping = false
       this.y = 350
-      this.force = 60
+      this.sprite.style.top = `${this.y}px`
+      this.force = character === 'kimchi' ? 100 : 80
     }
   }
 

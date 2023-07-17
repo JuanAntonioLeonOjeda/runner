@@ -54,14 +54,10 @@ function startGame() {
   
   let gameTimer = setInterval(() => {
     player.jump()
-    enemies.forEach(enemy => {
-      enemy.move()
-      console.log(enemy.playerCollision(player))
-    })
   }, 100)
 
   let enemyTimer = setInterval(() => {
-    const enemy = new Enemy(375, speed, board)
+    const enemy = new Enemy(375, speed, board, player)
     enemies.push(enemy)
     enemy.drawEnemy()
   }, 3000)
