@@ -16,7 +16,7 @@ function Enemy (y, speed, parent, player) {
 
   this.move = function () {
     if (self.playerCollision()) {
-      alert('Game Over')
+      player.isDead = true
     }
 
     self.x -= self.speed

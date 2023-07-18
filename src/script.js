@@ -54,6 +54,9 @@ function startGame() {
   
   let gameTimer = setInterval(() => {
     player.jump()
+    if (player.isDead) {
+      gameOver()
+    }
   }, 100)
 
   let enemyTimer = setInterval(() => {
@@ -61,6 +64,16 @@ function startGame() {
     enemies.push(enemy)
     enemy.drawEnemy()
   }, 3000)
+
+  function gameOver() {
+    clearInterval(gameTimer)
+    clearInterval(enemyTimer)
+    enemies.forEach(enemy => {
+      clearInterval(enemy.timerId)
+    })
+    alert('Game Over')
+  }
+
 
   window.addEventListener('mousedown', () => {
     if (!player.jumping) {
