@@ -4,6 +4,7 @@ function Player(character, parent) {
   this.y = 350
   this.jumping = false
   this.force = character === 'kimchi' ? 110 : 80
+  this.fallSpeed = character === 'tati' ? 10 : 20
   this.height = 50
   this.width = 50
   this.isDead = false
@@ -21,16 +22,13 @@ function Player(character, parent) {
     if (this.jumping && this.force >= 0.15) {
       this.y -= this.force
       this.force -= this.force * 0.6
-      this.sprite.style.top = `${this.y}px`
     } else if (!this.collideFloor()) {
-      this.y += character === 'tati' ? 10 : 25
-      this.sprite.style.top = `${this.y}px`
+      this.y = Math.min(this.y + this.fallSpeed, 350);
     } else {
       this.jumping = false
-      this.y = 350
-      this.sprite.style.top = `${this.y}px`
       this.force = character === 'kimchi' ? 100 : 80
     }
+    this.sprite.style.top = `${this.y}px`
   }
 
   this.collideFloor = function () {
