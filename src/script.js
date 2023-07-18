@@ -60,7 +60,7 @@ function startGame() {
   }, 100)
 
   let enemyTimer = setInterval(() => {
-    const enemy = new Enemy(375, speed, board, player)
+    const enemy = new Enemy(375, speed, board, player, enemies)
     enemies.push(enemy)
     enemy.drawEnemy()
   }, 3000)
