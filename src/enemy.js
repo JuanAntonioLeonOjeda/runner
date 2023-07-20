@@ -38,7 +38,6 @@ function Enemy (y, speed, parent, player, array) {
     parent.removeChild(this.sprite)
     clearInterval(this.timerId)
     array.splice(0,1)
-    console.log(array)
   }
 
   this.timerId = setInterval(this.move, 100)

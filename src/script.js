@@ -1,4 +1,5 @@
 import { characterScreen } from "./characterScreen.js"
+import { gameOverScreen } from "./gameOver.js"
 import { Player } from './player.js'
 import { Enemy } from './enemy.js'
 
@@ -71,7 +72,35 @@ function startGame() {
     enemies.forEach(enemy => {
       clearInterval(enemy.timerId)
     })
-    alert('Game Over')
+    removeChildren(board)
+    board.innerHTML = gameOverScreen
+    board.style.background = 'none'
+    board.style.backgroundColor = 'grey'
+
+    const retry = document.getElementById('retry-btn')
+    retry.addEventListener('click', () => {
+      removeChildren(board)
+      loadCharacterScreen()
+      const options = document.getElementsByClassName('character-select')
+      for (let i = 0; i < options.length; i++) {
+        options[i].addEventListener('click', (e) => {
+          e.stopPropagation()
+          switch (i) {
+            case 0:
+              character = 'tati'
+              break
+            case 1:
+              character = 'juanan'
+              break
+            case 2:
+              character = 'kimchi'
+              break
+          }
+          removeChildren(board)
+          startGame()
+        })
+      }
+    })
   }
 
 
