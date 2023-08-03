@@ -55,6 +55,7 @@ function startGame() {
   
   let gameTimer = setInterval(() => {
     player.jump()
+    player.runAnimation()
     if (player.isDead) {
       gameOver()
     }

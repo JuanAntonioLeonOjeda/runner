@@ -9,13 +9,19 @@ function Player(character, parent) {
   this.width = 50
   this.isDead = false
   this.sprite = document.createElement('div')
+  this.spriteX = 300
   this.sprite.classList.add('player')
-  this.sprite.style.backgroundImage = `url(./assets/characters/${character}/main.jpg)`
+  this.sprite.style.backgroundImage = `url(./assets/characters/${character}/${character}.png)`
 
   this.drawPlayer = function() {
     this.sprite.style.left = `${this.x}px`
     this.sprite.style.top = `${this.y}px`
     parent.appendChild(this.sprite)
+  }
+
+  this.runAnimation = function () {
+    self.spriteX += 300
+    self.sprite.style.backgroundPosition = `${self.spriteX}px 0px`
   }
 
   this.jump = function() {
