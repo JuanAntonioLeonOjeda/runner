@@ -17,15 +17,6 @@ function removeChildren(element) {
   }
 }
 
-function loadCharacterScreen() {
-  board.innerHTML = characterScreen
-}
-
-function loadBackground(source) {
-  board.style.backgroundImage = `url(./assets/backgrounds/${source}.gif)`
-  board.style.backgroundSize = 'cover'
-}
-
 function characterSelection() {
   removeChildren(board)
   loadCharacterScreen()
@@ -48,6 +39,15 @@ function characterSelection() {
       startGame()
     })
   }
+}
+
+function loadCharacterScreen() {
+  board.innerHTML = characterScreen
+}
+
+function loadBackground(source) {
+  board.style.backgroundImage = `url(./assets/backgrounds/${source}.gif)`
+  board.style.backgroundSize = 'cover'
 }
 
 function startGame() {
@@ -73,18 +73,26 @@ function startGame() {
   }
 
   function gameOver() {
+    clearTimers()
+    loadGameOverScreen()
+
+    const retry = document.getElementById('retry-btn')
+    retry.addEventListener('click', characterSelection)
+  }
+
+  function clearTimers () {
     clearInterval(gameTimer)
     clearInterval(enemyTimer)
     enemies.forEach(enemy => {
       clearInterval(enemy.timerId)
     })
+  }
+
+  function loadGameOverScreen () {
     removeChildren(board)
     board.innerHTML = gameOverScreen
     board.style.background = 'none'
     board.style.backgroundColor = 'grey'
-
-    const retry = document.getElementById('retry-btn')
-    retry.addEventListener('click', characterSelection)
   }
 
   window.addEventListener('mousedown', () => {
