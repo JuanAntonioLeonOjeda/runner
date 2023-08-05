@@ -9,7 +9,24 @@ let character
 let speed = 10
 let enemies = []
 
-startButton.addEventListener('click', (e) => {
+startButton.addEventListener('click', characterSelection)
+
+function removeChildren(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild)
+  }
+}
+
+function loadCharacterScreen() {
+  board.innerHTML = characterScreen
+}
+
+function loadBackground(source) {
+  board.style.backgroundImage = `url(./assets/backgrounds/${source}.gif)`
+  board.style.backgroundSize = 'cover'
+}
+
+function characterSelection() {
   removeChildren(board)
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')
@@ -31,21 +48,6 @@ startButton.addEventListener('click', (e) => {
       startGame()
     })
   }
-})
-
-function removeChildren(element) {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild)
-  }
-}
-
-function loadCharacterScreen() {
-  board.innerHTML = characterScreen
-}
-
-function loadBackground(source) {
-  board.style.backgroundImage = `url(./assets/backgrounds/${source}.gif)`
-  board.style.backgroundSize = 'cover'
 }
 
 function startGame() {
@@ -53,19 +55,22 @@ function startGame() {
   player.drawPlayer()
   loadBackground('road')
   
-  let gameTimer = setInterval(() => {
+  let gameTimer = setInterval(gameLoop, 100)
+  let enemyTimer = setInterval(enemyCreation, 3000)
+
+  function gameLoop () {
     player.jump()
     player.runAnimation()
     if (player.isDead) {
       gameOver()
     }
-  }, 100)
+  }
 
-  let enemyTimer = setInterval(() => {
+  function enemyCreation () {
     const enemy = new Enemy(375, speed, board, player, enemies)
     enemies.push(enemy)
     enemy.drawEnemy()
-  }, 3000)
+  }
 
   function gameOver() {
     clearInterval(gameTimer)
@@ -79,31 +84,8 @@ function startGame() {
     board.style.backgroundColor = 'grey'
 
     const retry = document.getElementById('retry-btn')
-    retry.addEventListener('click', () => {
-      removeChildren(board)
-      loadCharacterScreen()
-      const options = document.getElementsByClassName('character-select')
-      for (let i = 0; i < options.length; i++) {
-        options[i].addEventListener('click', (e) => {
-          e.stopPropagation()
-          switch (i) {
-            case 0:
-              character = 'tati'
-              break
-            case 1:
-              character = 'juanan'
-              break
-            case 2:
-              character = 'kimchi'
-              break
-          }
-          removeChildren(board)
-          startGame()
-        })
-      }
-    })
+    retry.addEventListener('click', characterSelection)
   }
-
 
   window.addEventListener('mousedown', () => {
     if (!player.jumping) {

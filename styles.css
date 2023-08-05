@@ -7,9 +7,10 @@
 }
 
 .player {
-  width: 300px;
-  height: 300px;
+  width: 90px;
+  height: 100px;
   position: absolute;
+  background-size: auto 100%;
 }
 
 .enemy {
