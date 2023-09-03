@@ -6,7 +6,7 @@ import { Enemy } from './enemy.js'
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
 let character
-let speed = 10
+let enemySpeed = 10
 let enemies = []
 
 startButton.addEventListener('click', characterSelection)
@@ -67,7 +67,7 @@ function startGame() {
   }
 
   function enemyCreation () {
-    const enemy = new Enemy(375, speed, board, player, enemies)
+    const enemy = new Enemy(375, enemySpeed, board, player, enemies)
     enemies.push(enemy)
     enemy.drawEnemy()
   }

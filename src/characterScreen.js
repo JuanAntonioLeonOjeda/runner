@@ -2,8 +2,8 @@ const characterScreen = `
   <h3 class="title">Choose your character</h3>
   <main>
   <div>
-    <div class="character-select" style="background-image: url(./assets/characters/tati/main.jpg);"></div>
-    <div class="character-select" style="background-image: url(./assets/characters/juanan/main.jpg);"></div>
+    <div class="character-select" style="background-image: url(./assets/characters/tati/main.png);"></div>
+    <div class="character-select" style="background-image: url(./assets/characters/juanan/main.png);"></div>
     <div class="character-select" style="background-image: url(./assets/characters/kimchi/main.jpg);"></div>
   </div>
   <div>
