@@ -19,8 +19,12 @@ function Player(character, parent) {
     parent.appendChild(this.sprite)
   }
 
+  this.numberOfSprites = function() {
+    return character === 'kimchi' ? 6 : 4
+  }
+
   this.runAnimation = function () {
-    self.spriteNum = (self.spriteNum % 4) + 1
+    self.spriteNum = (self.spriteNum % self.numberOfSprites()) + 1
     self.sprite.style.backgroundImage = `url(./assets/characters/${character}/running/${self.spriteNum}.png`
   }
 
