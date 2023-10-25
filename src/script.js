@@ -8,6 +8,8 @@ const startButton = document.getElementsByClassName('start-button')[0]
 let character
 let enemySpeed = 10
 let enemies = []
+let flyingEnemies = false
+let score = 0
 
 startButton.addEventListener('click', characterSelection)
 
@@ -51,12 +53,20 @@ function loadBackground(source) {
 }
 
 function startGame() {
+  score = 0
   const player = new Player(character, board)
   player.drawPlayer()
   loadBackground('road')
+  const displayScore = document.createElement('span')
+  displayScore.classList.add('score')
+  displayScore.innerText = `Score: ${score}`
+  board.appendChild(displayScore)
   
+  setTimeout(changeMode, 10000)
   let gameTimer = setInterval(gameLoop, 100)
   let enemyTimer = setInterval(enemyCreation, 3000)
+  let speedTimer = setInterval(increaseSpeed, 30000)
+  let scoreTimer = setInterval(sumScore, 100)
 
   function gameLoop () {
     player.jump()
@@ -66,8 +76,25 @@ function startGame() {
     }
   }
 
+  function sumScore () {
+    score += 5
+    displayScore.innerText = `Score: ${score}`
+  }
+  function changeMode () {
+    flyingEnemies = true
+  }
+
+  function increaseSpeed () {
+    enemySpeed *= 1.5
+  }
+
   function enemyCreation () {
-    const enemy = new Enemy(375, enemySpeed, board, player, enemies)
+    const heights = [375, 250]
+    let index = 0
+    if (flyingEnemies) {
+      index = Math.floor(Math.random() * heights.length)
+    }
+    const enemy = new Enemy(heights[index], enemySpeed, board, player, enemies)
     enemies.push(enemy)
     enemy.drawEnemy()
   }
@@ -75,7 +102,6 @@ function startGame() {
   function gameOver() {
     clearTimers()
     loadGameOverScreen()
-
     const retry = document.getElementById('retry-btn')
     retry.addEventListener('click', characterSelection)
   }
@@ -83,6 +109,8 @@ function startGame() {
   function clearTimers () {
     clearInterval(gameTimer)
     clearInterval(enemyTimer)
+    clearInterval(speedTimer)
+    clearInterval(scoreTimer)
     enemies.forEach(enemy => {
       clearInterval(enemy.timerId)
     })
@@ -93,6 +121,8 @@ function startGame() {
     board.innerHTML = gameOverScreen
     board.style.background = 'none'
     board.style.backgroundColor = 'grey'
+    const totalScore = document.querySelector('.total-score')
+    totalScore.innerText = score
   }
 
   window.addEventListener('mousedown', () => {
