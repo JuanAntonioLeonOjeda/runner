@@ -2,12 +2,14 @@ import { characterScreen } from "./characterScreen.js"
 import { gameOverScreen } from "./gameOver.js"
 import { Player } from './player.js'
 import { Enemy } from './enemy.js'
+import { Bonus } from "./bonus.js"
 
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
 let character
-let enemySpeed = 10
+let gameSpeed = 10
 let enemies = []
+let bonusArr = []
 let flyingEnemies = false
 let score = 0
 
@@ -65,6 +67,7 @@ function startGame() {
   setTimeout(changeMode, 10000)
   let gameTimer = setInterval(gameLoop, 100)
   let enemyTimer = setInterval(enemyCreation, 3000)
+  let bonusTimer = setInterval(bonusCreation, 5000)
   let speedTimer = setInterval(increaseSpeed, 30000)
   let scoreTimer = setInterval(sumScore, 100)
 
@@ -73,6 +76,10 @@ function startGame() {
     player.runAnimation()
     if (player.isDead) {
       gameOver()
+    }
+    if (player.sumBonus) {
+      score += 250
+      player.sumBonus = false
     }
   }
 
@@ -85,7 +92,7 @@ function startGame() {
   }
 
   function increaseSpeed () {
-    enemySpeed *= 1.5
+    gameSpeed *= 1.5
   }
 
   function enemyCreation () {
@@ -94,9 +101,17 @@ function startGame() {
     if (flyingEnemies) {
       index = Math.floor(Math.random() * heights.length)
     }
-    const enemy = new Enemy(heights[index], enemySpeed, board, player, enemies)
+    const enemy = new Enemy(heights[index], gameSpeed, board, player, enemies)
     enemies.push(enemy)
     enemy.drawEnemy()
+  }
+
+  function bonusCreation() {
+    const heights = [350, 250]
+    let index = Math.floor(Math.random() * heights.length)
+    const bonus = new Bonus(heights[index], gameSpeed, board, player, bonusArr)
+    bonusArr.push(bonus)
+    bonus.drawBonus()
   }
 
   function gameOver() {
@@ -111,8 +126,12 @@ function startGame() {
     clearInterval(enemyTimer)
     clearInterval(speedTimer)
     clearInterval(scoreTimer)
+    clearInterval(bonusTimer)
     enemies.forEach(enemy => {
       clearInterval(enemy.timerId)
+    })
+    bonusArr.forEach(bonus => {
+      clearInterval(bonus.timerId)
     })
   }
 

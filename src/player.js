@@ -8,6 +8,7 @@ function Player(character, parent) {
   this.height = 100
   this.width = 90
   this.isDead = false
+  this.sumBonus = false
   this.sprite = document.createElement('div')
   this.spriteNum = 1
   this.sprite.classList.add('player')

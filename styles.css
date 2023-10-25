@@ -79,6 +79,13 @@
   position: absolute;
 }
 
+.bonus {
+  width: 25px;
+  height: 25px;
+  background-color: yellow;
+  position: absolute;
+}
+
 .score {
   position: absolute;
   top: 10px;
