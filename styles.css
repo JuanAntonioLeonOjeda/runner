@@ -11,6 +11,27 @@ body {
   background-color: grey;
   margin: auto;
   position: relative;
+  display: none;
+}
+
+/* Show game only in landscape/horizontal orientation */
+@media only screen and (orientation: landscape) {
+  #main {
+    display: block;
+  }
+}
+
+/* Hide game and display a message to rotate the device in portrait/vertical orientation */
+@media only screen and (orientation: portrait) {
+  body::after {
+    content: "Please rotate your device to landscape mode to play!";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
 }
 
 .title-container {
