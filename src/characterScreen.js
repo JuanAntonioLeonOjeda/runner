@@ -1,6 +1,6 @@
 const characterScreen = `
   <section class="title-container">
-    <h1 class="title">Choose your character</h1>
+    <h1 class="title">Elige tu personaje</h1>
   </section>
   <section id="characters">
     <div class="character-select">
