@@ -10,7 +10,7 @@ function Bonus (y, speed, parent, player, array, score) {
 
   this.drawBonus = function () {
     this.sprite.style.left = `${this.x}px`
-    this.sprite.style.top = `${this.y}px`
+    this.sprite.style.bottom = `${this.y}px`
     parent.appendChild(this.sprite)
   }
 

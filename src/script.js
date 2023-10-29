@@ -4,6 +4,22 @@ import { Player } from './player.js'
 import { Enemy } from './enemy.js'
 import { Bonus } from "./bonus.js"
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAWUX2UaP9LZnUkUrMFEX4F2QfOsARVjtw",
+//   authDomain: "boda-ef1c7.firebaseapp.com",
+//   projectId: "boda-ef1c7",
+//   storageBucket: "boda-ef1c7.appspot.com",
+//   messagingSenderId: "15933979577",
+//   appId: "1:15933979577:web:59a1a0d22b4591308a5468"
+// }
+
+// const app = firebase.initializeApp(firebaseConfig);
+
+// //const db = firebase.firestore();
+// const db = firebase.firestore()
+
+// console.log(db)
+
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
 let character
@@ -51,7 +67,7 @@ function loadCharacterScreen() {
 
 function loadBackground(source) {
   board.style.backgroundImage = `url(./assets/backgrounds/${source}.gif)`
-  board.style.backgroundSize = 'cover'
+  board.style.backgroundSize = 'contain'
 }
 
 function startGame() {
@@ -96,7 +112,7 @@ function startGame() {
   }
 
   function enemyCreation () {
-    const heights = [375, 250]
+    const heights = [50, 200]
     let index = 0
     if (flyingEnemies) {
       index = Math.floor(Math.random() * heights.length)
@@ -107,7 +123,7 @@ function startGame() {
   }
 
   function bonusCreation() {
-    const heights = [350, 250]
+    const heights = [100, 200]
     let index = Math.floor(Math.random() * heights.length)
     const bonus = new Bonus(heights[index], gameSpeed, board, player, bonusArr)
     bonusArr.push(bonus)

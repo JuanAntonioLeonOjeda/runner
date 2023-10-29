@@ -10,7 +10,7 @@ function Enemy (y, speed, parent, player, array) {
 
   this.drawEnemy = function () {
     this.sprite.style.left = `${this.x}px`
-    this.sprite.style.top = `${this.y}px`
+    this.sprite.style.bottom = `${this.y}px`
     parent.appendChild(this.sprite)
   }
 

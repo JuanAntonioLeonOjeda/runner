@@ -1,7 +1,7 @@
 function Player(character, parent) {
   const self = this
-  this.x = 50
-  this.y = 300
+  this.x = 5
+  this.y = 50
   this.jumping = false
   this.force = character === 'kimchi' ? 120 : 100
   this.fallSpeed = character === 'tati' ? 10 : 25
@@ -13,10 +13,11 @@ function Player(character, parent) {
   this.spriteNum = 1
   this.sprite.classList.add('player')
   this.sprite.style.backgroundImage = `url(./assets/characters/${character}/running/${this.spriteNum}.png)`
+  this.sprite.style.border="1px solid red"
 
   this.drawPlayer = function() {
-    this.sprite.style.left = `${this.x}px`
-    this.sprite.style.top = `${this.y}px`
+    this.sprite.style.left = `${this.x}vw`
+    this.sprite.style.bottom = `${this.y}px`
     parent.appendChild(this.sprite)
   }
 
@@ -31,19 +32,19 @@ function Player(character, parent) {
 
   this.jump = function() {
     if (this.jumping && this.force >= 0.15) {
-      this.y -= this.force
+      this.y += this.force
       this.force -= this.force * 0.6
     } else if (!this.collideFloor()) {
-      this.y = Math.min(this.y + this.fallSpeed, 300);
+      this.y = Math.max(this.y - this.fallSpeed, 50);
     } else {
       this.jumping = false
       this.force = character === 'kimchi' ? 100 : 80
     }
-    this.sprite.style.top = `${this.y}px`
+    this.sprite.style.bottom = `${this.y}px`
   }
 
   this.collideFloor = function () {
-    return this.y >= 300
+    return this.y <= 50
   }
 }
 
