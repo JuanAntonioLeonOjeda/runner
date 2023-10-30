@@ -4,6 +4,20 @@ import { Player } from './player.js'
 import { Enemy } from './enemy.js'
 import { Bonus } from "./bonus.js"
 import { db } from "./fireStore.js"
+import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js'
+
+async function getAllUsers() {
+  const usersCollection = collection(db, 'users');
+  console.log(usersCollection)
+  const userSnapshot = await getDocs(usersCollection);
+  const userList = userSnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+  console.log(userList);
+}
+
+getAllUsers();
 
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
