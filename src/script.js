@@ -4,7 +4,7 @@ import { Player } from './player.js'
 import { Enemy } from './enemy.js'
 import { Bonus } from "./bonus.js"
 import { db } from "./fireStore.js"
-import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js'
+import { collection, getDocs, addDoc } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js'
 
 async function getAllUsers() {
   const usersCollection = collection(db, 'users');
@@ -13,11 +13,23 @@ async function getAllUsers() {
   const userList = userSnapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()
-  }));
+  })).sort((a,b) => b.score - a.score)
   console.log(userList);
 }
 
 getAllUsers();
+
+async function insertUser() {
+  try {
+    const docRef = await addDoc(collection(db, "users"), {
+      name: 'Test',
+      score: 129
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
 
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
