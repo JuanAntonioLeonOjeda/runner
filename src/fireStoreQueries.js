@@ -3,7 +3,7 @@ import { db } from "./fireStoreConfig.js"
 
 async function getTopTen() {
   const usersCollection = collection(db, 'users')
-  const q = query(usersCollection, orderBy('score', 'desc'), limit(10))
+  const q = query(usersCollection, orderBy('score', 'desc'), limit(5))
 
   const querySnapshot = await getDocs(q)
   const orderedScores = querySnapshot.docs.map(doc => doc.data())

@@ -162,7 +162,7 @@ function startGame() {
     const uploadButton = document.querySelector('#upload-btn')
     uploadButton.addEventListener('click', async () => {
       const input = document.querySelector('#name-input')
-      const userName = input.value
+      const userName = input.value.toUpperCase()
       await insertUser({ name:userName, score})
       input.value = ''
       const main = document.querySelector('.game-over')
