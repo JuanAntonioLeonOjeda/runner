@@ -22,7 +22,22 @@ async function insertUser(data) {
   }
 }
 
+async function getAllPlayers() {
+  try {
+    const users = collection(db, 'users');
+    const q = query(users, orderBy('score', 'desc'))
+
+    const querySnapshot = await getDocs(q);
+    const result = querySnapshot.docs.map(doc => doc.data());
+
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   getTopTen,
-  insertUser
+  insertUser,
+  getAllPlayers
 }

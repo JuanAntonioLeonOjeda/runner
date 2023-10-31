@@ -5,7 +5,7 @@ const gameOverScreen = `
       Puntuación: <span class="total-score"></span>
     </section>
     <section class="input">
-      Nombre: <input type="text" id="name-input" />
+      Nombre: <input type="text" id="name-input" maxlength="10" />
     </section>
     <button id="upload-btn">Subir</button>
     <section class="top-title">

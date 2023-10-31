@@ -4,7 +4,7 @@ import { Player } from './player.js'
 import { Enemy } from './enemy.js'
 import { Bonus } from "./bonus.js"
 
-import { getTopTen, insertUser } from "./fireStoreQueries.js"
+import { getTopTen, insertUser, getAllPlayers } from "./fireStoreQueries.js"
 
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
@@ -140,6 +140,8 @@ function startGame() {
   async function loadTopScores () {
     try {
       const scores = await getTopTen()
+      const topSection = document.querySelector('.top-title')
+      topSection.style.display = 'flex'
       const list = document.querySelector('.scores')
       scores.forEach(player => {
         const container = document.createElement('div')
@@ -151,6 +153,25 @@ function startGame() {
     }
   }
 
+  async function uploadScore (uploadButton) {
+    const input = document.querySelector('#name-input')
+    const value = input.value.toUpperCase()
+    const userName = value
+    await insertUser({ name: userName, score })
+    const players = await getAllPlayers()
+    const result = players.findIndex(player => {
+      return player.name === value && player.score === score
+    })
+    input.value = ''
+    const main = document.querySelector('.game-over')
+    const top = document.querySelector('.top-title')
+    const confirm = document.createElement('div')
+    main.removeChild(uploadButton)
+    confirm.innerHTML = `Has quedado en ${result + 1} posición!`
+    loadTopScores()
+    main.insertBefore(confirm, top)
+  }
+
   function loadGameOverScreen () {
     removeChildren(board)
     board.innerHTML = gameOverScreen
@@ -158,20 +179,8 @@ function startGame() {
     board.style.backgroundColor = 'grey'
     const totalScore = document.querySelector('.total-score')
     totalScore.innerText = score
-    loadTopScores()
     const uploadButton = document.querySelector('#upload-btn')
-    uploadButton.addEventListener('click', async () => {
-      const input = document.querySelector('#name-input')
-      const userName = input.value.toUpperCase()
-      await insertUser({ name:userName, score})
-      input.value = ''
-      const main = document.querySelector('.game-over')
-      const top = document.querySelector('.top-title')
-      const confirm = document.createElement('div')
-      main.removeChild(uploadButton)
-      confirm.innerHTML = `Has quedado en X posición!`
-      main.insertBefore(confirm, top)
-    })
+    uploadButton.addEventListener('click', () => uploadScore(uploadButton))
   }
 
   window.addEventListener('mousedown', () => {

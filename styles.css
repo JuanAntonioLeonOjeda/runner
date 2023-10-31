@@ -195,7 +195,7 @@ h3 {
 
 .top-title {
   margin-top: 5vh;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }
