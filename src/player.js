@@ -1,6 +1,6 @@
 function Player(character, parent) {
   const self = this
-  this.x = 5
+  this.x = 50
   this.y = 50
   this.jumping = false
   this.force = character === 'kimchi' ? 120 : 100
@@ -16,7 +16,7 @@ function Player(character, parent) {
   this.sprite.style.border="1px solid red"
 
   this.drawPlayer = function() {
-    this.sprite.style.left = `${this.x}vw`
+    this.sprite.style.left = `${this.x}px`
     this.sprite.style.bottom = `${this.y}px`
     parent.appendChild(this.sprite)
   }

@@ -1,6 +1,6 @@
 function Bonus (y, speed, parent, player, array, score) {
   let self = this
-  this.x = 750
+  this.x = window.innerWidth
   this.y = y
   this.speed = speed
   this.width = 25

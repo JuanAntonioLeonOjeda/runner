@@ -1,6 +1,6 @@
 function Enemy (y, speed, parent, player, array) {
   let self = this
-  this.x = 750
+  this.x = window.innerWidth
   this.y = y
   this.speed = speed
   this.width = 25
@@ -15,12 +15,12 @@ function Enemy (y, speed, parent, player, array) {
   }
 
   this.move = function () {
+    self.x -= self.speed
+    self.sprite.style.left = `${self.x}px`
+    
     if (self.playerCollision()) {
       player.isDead = true
     }
-
-    self.x -= self.speed
-    self.sprite.style.left = `${self.x}px`
 
     if (self.x <= 0) {
       self.removeEnemy()

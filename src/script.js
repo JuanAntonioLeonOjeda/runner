@@ -157,6 +157,7 @@ function startGame() {
     const input = document.querySelector('#name-input')
     const value = input.value.toUpperCase()
     const userName = value
+    localStorage.setItem('user', value)
     await insertUser({ name: userName, score })
     const players = await getAllPlayers()
     const result = players.findIndex(player => {
@@ -175,6 +176,10 @@ function startGame() {
   function loadGameOverScreen () {
     removeChildren(board)
     board.innerHTML = gameOverScreen
+     const input = document.querySelector("#name-input");
+     if (!input.value) {
+      input.value = localStorage.getItem('user')
+     }
     board.style.background = 'none'
     board.style.backgroundColor = 'grey'
     const totalScore = document.querySelector('.total-score')
