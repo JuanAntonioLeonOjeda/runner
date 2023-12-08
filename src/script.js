@@ -161,14 +161,14 @@ function startGame() {
     await insertUser({ name: userName, score })
     const players = await getAllPlayers()
     const result = players.findIndex(player => {
-      return player.name === value && player.score === score
+      return player.name === value
     })
     input.value = ''
     const main = document.querySelector('.game-over')
     const top = document.querySelector('.top-title')
     const confirm = document.createElement('div')
     main.removeChild(uploadButton)
-    confirm.innerHTML = `Has quedado en ${result + 1} posición!`
+    confirm.innerHTML = `Estás en ${result + 1}ª posición!`
     loadTopScores()
     main.insertBefore(confirm, top)
   }

@@ -131,17 +131,15 @@ h3 {
 }
 
 .enemy {
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
   position: absolute;
-  border: 1px solid red;
 }
 
 .bonus {
   width: 50px;
   height: 50px;
   position: absolute;
-  border: 1px solid red;
 }
 
 .score {

@@ -4,7 +4,7 @@ function Player(character, parent) {
   this.y = 50
   this.jumping = false
   this.force = character === 'kimchi' ? 140 : 110
-  this.fallSpeed = character === 'tati' ? 10 : 25
+  this.fallSpeed = character === 'tati' ? 10 : 20
   this.height = 100
   this.width = 90
   this.isDead = false
@@ -13,7 +13,6 @@ function Player(character, parent) {
   this.spriteNum = 1
   this.sprite.classList.add('player')
   this.sprite.style.backgroundImage = `url(./assets/characters/${character}/running/${this.spriteNum}.png)`
-  this.sprite.style.border="1px solid red"
 
   this.drawPlayer = function() {
     this.sprite.style.left = `${this.x}px`
@@ -31,7 +30,7 @@ function Player(character, parent) {
   }
 
   this.jump = function() {
-    if (this.jumping && this.force >= 0.15) {
+    if (this.jumping && this.force >= 0.10) {
       this.y += this.force
       this.force -= this.force * 0.6
     } else if (!this.collideFloor()) {
