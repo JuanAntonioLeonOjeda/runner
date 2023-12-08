@@ -166,8 +166,10 @@ function startGame() {
     input.value = ''
     const main = document.querySelector('.game-over')
     const top = document.querySelector('.top-title')
+    const inputSection = document.querySelector('.input')
     const confirm = document.createElement('div')
     main.removeChild(uploadButton)
+    main.removeChild(inputSection)
     confirm.innerHTML = `Estás en ${result + 1}ª posición!`
     loadTopScores()
     main.insertBefore(confirm, top)
