@@ -188,7 +188,7 @@ function startGame() {
     uploadButton.addEventListener('click', () => uploadScore(uploadButton))
   }
 
-  window.addEventListener('mousedown', () => {
+  window.addEventListener('click', () => {
     if (!player.jumping) {
       player.jumping = true
     }

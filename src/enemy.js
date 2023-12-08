@@ -7,6 +7,8 @@ function Enemy (y, speed, parent, player, array) {
   this.height = 25
   this.sprite = document.createElement('div')
   this.sprite.classList.add('enemy')
+  this.sprite.style.backgroundImage = `url(./assets/enemies/baby.png`
+  this.sprite.style.backgroundSize = "cover";
 
   this.drawEnemy = function () {
     this.sprite.style.left = `${this.x}px`
@@ -28,10 +30,10 @@ function Enemy (y, speed, parent, player, array) {
   }
 
   this.playerCollision = function () {
-    return self.x <= player.x + player.width &&
-           self.x + self.width >= player.x &&
-           self.y <= player.y + player.height &&
-           self.y + self.height >= player.y
+    return self.x < player.x + player.width &&
+           self.x + self.width > player.x &&
+           self.y < player.y + player.height &&
+           self.y + self.height > player.y
   }
 
   this.removeEnemy = function () {

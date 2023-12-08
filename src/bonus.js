@@ -7,6 +7,9 @@ function Bonus (y, speed, parent, player, array, score) {
   this.height = 25
   this.sprite = document.createElement('div')
   this.sprite.classList.add('bonus')
+  this.sprite.style.backgroundImage = `url(./assets/bonus/lp.png`
+  this.sprite.style.backgroundSize = 'contain'
+
 
   this.drawBonus = function () {
     this.sprite.style.left = `${this.x}px`

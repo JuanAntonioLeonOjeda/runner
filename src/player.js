@@ -3,7 +3,7 @@ function Player(character, parent) {
   this.x = 50
   this.y = 50
   this.jumping = false
-  this.force = character === 'kimchi' ? 120 : 100
+  this.force = character === 'kimchi' ? 140 : 110
   this.fallSpeed = character === 'tati' ? 10 : 25
   this.height = 100
   this.width = 90
