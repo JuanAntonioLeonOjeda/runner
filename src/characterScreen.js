@@ -6,14 +6,14 @@ const characterScreen = `
     <div class="character-select">
       <h3>Tati</h3>
       <div class="container">
-        <img class="person" src="../assets/characters/tati/main.png">
+        <img class="person" src="/assets/characters/tati/main.png">
       </div>
       <p>Dura más en el aire</p>
     </div>
     <div class="character-select">
       <h3>Juanan</h3>
       <div class="container">
-        <img class="person" src="../assets/characters/juanan/main.png">
+        <img class="person" src="/assets/characters/juanan/main.png">
       </div>
       <p>No hace nada especial pero suenan temazos</p>
     </div>
