@@ -15,7 +15,6 @@ function Player(character, parent) {
   this.character = character
   character === 'kimchi' ? this.sprite.setAttribute('id', 'kimchi') : null
   this.sprite.style.backgroundImage = `url(./assets/characters/${character}/running/${this.spriteNum}.png)`
-  this.sprite.style.border = '1px solid red'
 
   this.drawPlayer = function() {
     this.sprite.style.left = `${this.x}px`

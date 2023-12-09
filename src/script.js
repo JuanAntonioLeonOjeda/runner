@@ -49,6 +49,8 @@ function characterSelection() {
 
 function loadCharacterScreen() {
   board.innerHTML = characterScreen
+  board.style.backgroundImage = 'none'
+  board.style.backgroundColor = 'gray'
 }
 
 function loadBackground(source) {
