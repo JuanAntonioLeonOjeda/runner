@@ -14,7 +14,10 @@ h3 {
   height: 100vh;
   max-width: 1000px;
   max-height: 550px;
-  background-color: grey;
+  background-image: url('./assets/backgrounds/title/title.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center;
   margin: auto;
   position: relative;
   display: none;
@@ -60,15 +63,25 @@ h3 {
   justify-content: center;
 }
 
-.start-title {
-  padding-top: 40vh;
-  text-align: center;
+.title {
+  padding-top: 20vh;
   margin: 0;
+}
+
+.start-title {
+  padding: 20px;
+  padding-top: 30px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: lightblue;
+  width: fit-content;
+  border-radius: 15px;
 }
 
 .start-button {
   width: 100%;
   margin: auto;
+  margin-bottom: 40px;
   display: flex;
   justify-content: center;
 }
@@ -78,9 +91,12 @@ h3 {
   height: 10vh;
   font-family: 'Press Start 2P';
   font-size: 16px;
-  margin-top: 5vh;
+  margin-top: 20vh;
   min-width: 200px;
   max-height: 50px;
+  background-color: lightblue;
+  border: 3px solid black;
+  border-radius: 15px;
 }
 
 .character-select {

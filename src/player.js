@@ -3,10 +3,10 @@ function Player(character, parent) {
   this.x = 50
   this.y = 50
   this.jumping = false
-  this.force = character === 'kimchi' ? 140 : 110
-  this.fallSpeed = character === 'tati' ? 10 : 20
-  this.height = 100
-  this.width = 90
+  this.force = character === 'kimchi' ? 160 : 110
+  this.fallSpeed = character === 'tati' ? 10 : 25
+  this.height = character === 'kimchi' ? 50 : 100
+  this.width = character === 'kimchi' ? 50 : 90
   this.isDead = false
   this.sumBonus = false
   this.sprite = document.createElement('div')
@@ -15,6 +15,7 @@ function Player(character, parent) {
   this.character = character
   character === 'kimchi' ? this.sprite.setAttribute('id', 'kimchi') : null
   this.sprite.style.backgroundImage = `url(./assets/characters/${character}/running/${this.spriteNum}.png)`
+  this.sprite.style.border = '1px solid red'
 
   this.drawPlayer = function() {
     this.sprite.style.left = `${this.x}px`
@@ -32,14 +33,14 @@ function Player(character, parent) {
   }
 
   this.jump = function() {
-    if (this.jumping && this.force >= 0.10) {
+    if (this.jumping && this.force >= 0.15) {
       this.y += this.force
       this.force -= this.force * 0.6
     } else if (!this.collideFloor()) {
       this.y = Math.max(this.y - this.fallSpeed, 50);
     } else {
       this.jumping = false
-      this.force = character === 'kimchi' ? 100 : 80
+      this.force = character === 'kimchi' ? 160 : 110
     }
     this.sprite.style.bottom = `${this.y}px`
   }

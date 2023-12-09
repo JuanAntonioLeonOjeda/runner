@@ -8,7 +8,7 @@ const characterScreen = `
       <div class="container">
         <img class="person" src="/assets/characters/tati/main.png">
       </div>
-      <p>Dura más en el aire</p>
+      <p>Cae más lento</p>
     </div>
     <div class="character-select">
       <h3>Juanan</h3>
