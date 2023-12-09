@@ -1,7 +1,0 @@
-{
-  "short_name": "Game",
-  "name": "Wedding Runner",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "orientation": "landscape"
-}

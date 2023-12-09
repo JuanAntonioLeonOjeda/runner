@@ -6,6 +6,20 @@ import { Bonus } from "./bonus.js"
 
 import { getTopTen, insertUser, getAllPlayers } from "./fireStoreQueries.js"
 
+function goFullScreen() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+        document.documentElement.msRequestFullscreen();
+    }
+}
+
+// You can call this function on a user action, like a button click
+
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
 let character
@@ -24,6 +38,7 @@ function removeChildren(element) {
 }
 
 function characterSelection() {
+  goFullScreen()
   removeChildren(board)
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')
