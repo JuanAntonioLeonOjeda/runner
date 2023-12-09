@@ -7,9 +7,13 @@ function Enemy (y, speed, parent, player, array) {
   this.height = 25
   this.sprite = document.createElement('div')
   this.sprite.classList.add('enemy')
-  this.sprite.style.backgroundImage = `url(./assets/enemies/baby.png`
   this.sprite.style.backgroundSize = "cover";
-
+  
+  this.checkHeight = function () {
+    return this.y === 50 ? 'baby.png' : 'email.png'
+  }
+  this.sprite.style.backgroundImage = `url(./assets/enemies/${this.checkHeight()}`
+  
   this.drawEnemy = function () {
     this.sprite.style.left = `${this.x}px`
     this.sprite.style.bottom = `${this.y}px`
