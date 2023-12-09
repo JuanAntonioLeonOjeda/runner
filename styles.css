@@ -30,7 +30,7 @@ h3 {
 /* Hide game and display a message to rotate the device in portrait/vertical orientation */
 @media only screen and (orientation: portrait) {
   body::after {
-    content: "Please rotate your device to landscape mode to play!";
+    content: "Rota tu móvil en horizontal para jugar!";
     display: block;
     position: absolute;
     top: 50%;
@@ -145,6 +145,7 @@ h3 {
   width: 50px;
   height: 50px;
   position: absolute;
+  background-repeat: no-repeat;
 }
 
 .score {

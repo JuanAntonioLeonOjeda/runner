@@ -1,4 +1,4 @@
-function Bonus (y, speed, parent, player, array, score) {
+function Bonus (y, speed, parent, player, array) {
   let self = this
   this.x = window.innerWidth
   this.y = y
@@ -7,9 +7,14 @@ function Bonus (y, speed, parent, player, array, score) {
   this.height = 25
   this.sprite = document.createElement('div')
   this.sprite.classList.add('bonus')
-  this.sprite.style.backgroundImage = `url(./assets/bonus/lp.png`
   this.sprite.style.backgroundSize = 'contain'
 
+  this.checkCharacter = function () {
+    if (player.character === 'tati') return 'chocolate'
+    if (player.character === 'juanan') return 'lp'
+    return 'fish'
+  }
+  this.sprite.style.backgroundImage = `url(./assets/bonus/${this.checkCharacter()}.png`
 
   this.drawBonus = function () {
     this.sprite.style.left = `${this.x}px`

@@ -12,6 +12,7 @@ function Player(character, parent) {
   this.sprite = document.createElement('div')
   this.spriteNum = 1
   this.sprite.classList.add('player')
+  this.character = character
   character === 'kimchi' ? this.sprite.setAttribute('id', 'kimchi') : null
   this.sprite.style.backgroundImage = `url(./assets/characters/${character}/running/${this.spriteNum}.png)`
 
