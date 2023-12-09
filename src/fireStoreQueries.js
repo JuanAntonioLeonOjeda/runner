@@ -28,11 +28,6 @@ async function insertUser(data) {
         await updateDoc(userDoc.ref, {
           score: data.score,
         });
-        console.log("Score updated for user:", data.name);
-      } else {
-        console.log(
-          "New score is not higher than the existing score. No update made."
-        );
       }
     } else {
       // User does not exist, add new user
@@ -40,7 +35,6 @@ async function insertUser(data) {
         name: data.name,
         score: data.score,
       });
-      console.log("New user added with ID:", docRef.id);
     }
   } catch (e) {
     console.error("Error accessing the database: ", e);

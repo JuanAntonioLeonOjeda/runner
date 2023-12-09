@@ -154,18 +154,22 @@ function startGame() {
   }
 
   async function uploadScore (uploadButton) {
+    const main = document.querySelector('.game-over')
+    const top = document.querySelector('.top-title')
     const input = document.querySelector('#name-input')
     const value = input.value.toUpperCase()
     const userName = value
     localStorage.setItem('user', value)
+    const loading = document.createElement("div")
+    loading.classList.add('hourglass')
+    main.insertBefore(loading, top)
     await insertUser({ name: userName, score })
     const players = await getAllPlayers()
     const result = players.findIndex(player => {
       return player.name === value
     })
+    main.removeChild(loading)
     input.value = ''
-    const main = document.querySelector('.game-over')
-    const top = document.querySelector('.top-title')
     const inputSection = document.querySelector('.input')
     const confirm = document.createElement('div')
     main.removeChild(uploadButton)
