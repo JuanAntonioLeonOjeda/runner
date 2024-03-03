@@ -98,7 +98,9 @@ function startGame() {
 
   function gameLoop () {
     player.jump()
-    player.runAnimation()
+    if (!player.jumping) {
+      player.runAnimation()
+    }
     if (player.isDead) {
       gameOver()
     }
@@ -158,6 +160,7 @@ function startGame() {
     bonusArr.forEach(bonus => {
       clearInterval(bonus.timerId)
     })
+    gameSpeed = 10
   }
 
   async function loadTopScores () {

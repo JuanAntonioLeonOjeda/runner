@@ -4,7 +4,7 @@ function Bonus (y, speed, parent, player, array) {
   this.y = y
   this.speed = speed
   this.width = 25
-  this.height = 25
+  this.height = player.character === 'kimchi' ? 15 : 25
   this.sprite = document.createElement('div')
   this.sprite.classList.add('bonus')
   this.sprite.style.backgroundSize = 'contain'
@@ -19,6 +19,9 @@ function Bonus (y, speed, parent, player, array) {
   this.drawBonus = function () {
     this.sprite.style.left = `${this.x}px`
     this.sprite.style.bottom = `${this.y}px`
+    if (player.character === 'kimchi') {
+      this.sprite.style.height = "25px";
+    }
     parent.appendChild(this.sprite)
   }
 
