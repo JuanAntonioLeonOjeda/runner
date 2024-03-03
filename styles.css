@@ -115,7 +115,9 @@ h3 {
 
 .kimchi {
   width: 100%;
-  height: calc(100px + 0.5vw);
+  height: calc(50px + 0.5vw);
+  margin-top: 50px;
+  margin-bottom: 8px;
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url('./assets/characters/kimchi/main.png');
@@ -179,13 +181,14 @@ h3 {
 }
 
 .btn-section {
+  position: absolute;
   width: 90%;
+  height: 90%;
+  right: 10;
   display: flex;
   justify-content: flex-end;
-}
-
-.retry-btn {
-  align-self: flex-end;
+  align-items: flex-end;
+  z-index: initial;
 }
 
 #retry-btn {

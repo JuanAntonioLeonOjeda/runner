@@ -217,15 +217,15 @@ function startGame() {
     uploadButton.addEventListener('click', () => uploadScore(uploadButton))
   }
 
-  window.addEventListener('click', () => {
+  board.addEventListener('click', () => {
     if (!player.jumping) {
       player.jumping = true
     }
   })
 
-  /*window.addEventListener('mouseup', () => {
-    if (player.jumping) {
-      player.jumping = false
-    }
-  })*/
+  // board.addEventListener('touchend', () => {
+  //   if (player.jumping) {
+  //     player.jumping = false
+  //   }
+  // })
 }
