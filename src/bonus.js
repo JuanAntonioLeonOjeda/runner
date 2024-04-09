@@ -29,9 +29,11 @@ function Bonus (y, speed, parent, player, array) {
     self.x -= self.speed
     self.sprite.style.left = `${self.x}px`
     
-    if (self.playerCollision() || self.x <= 0) {
+    if (self.playerCollision()) {
       self.removeBonus()
       player.sumBonus = true
+    } else if (self.x <= 0) {
+      self.removeBonus()
     }
   }
 
@@ -48,7 +50,7 @@ function Bonus (y, speed, parent, player, array) {
     array.splice(0,1)
   }
 
-  this.timerId = setInterval(this.move, 100)
+  this.timerId = setInterval(this.move, 50)
 }
 
 export { Bonus }

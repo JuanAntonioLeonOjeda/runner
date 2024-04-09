@@ -89,8 +89,8 @@ function startGame() {
   displayScore.innerText = `Score: ${score}`
   board.appendChild(displayScore)
   
-  setTimeout(changeMode, 10000)
-  let gameTimer = setInterval(gameLoop, 100)
+  setTimeout(changeMode, 30000)
+  let gameTimer = setInterval(gameLoop, 50)
   let enemyTimer = setInterval(enemyCreation, 3000)
   let bonusTimer = setInterval(bonusCreation, 5000)
   let speedTimer = setInterval(increaseSpeed, 30000)

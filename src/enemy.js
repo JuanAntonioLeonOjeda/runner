@@ -46,7 +46,7 @@ function Enemy (y, speed, parent, player, array) {
     array.splice(0,1)
   }
 
-  this.timerId = setInterval(this.move, 100)
+  this.timerId = setInterval(this.move, 50)
 }
 
 export { Enemy }
