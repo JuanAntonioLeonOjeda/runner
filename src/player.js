@@ -38,7 +38,7 @@ function Player(character, parent) {
   }
 
   this.jump = function() {
-    if (this.jumping && this.force >= 0.15) {
+    if (this.jumping && this.force > 0.1) {
       this.y += this.force
       this.force -= this.force * 0.6
       self.sprite.style.backgroundImage = `url(./assets/characters/${character}/jumping/up.png`;
