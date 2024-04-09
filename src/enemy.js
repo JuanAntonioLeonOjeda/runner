@@ -34,10 +34,10 @@ function Enemy (y, speed, parent, player, array) {
   }
 
   this.playerCollision = function () {
-    return self.x < player.x + player.width &&
-           self.x + self.width > player.x &&
-           self.y < player.y + player.height &&
-           self.y + self.height > player.y
+    return self.x < player.x + player.width - 10 &&
+           self.x + self.width > player.x + 10 &&
+           self.y < player.y + player.height + 10 &&
+           self.y + self.height > player.y - 10
   }
 
   this.removeEnemy = function () {

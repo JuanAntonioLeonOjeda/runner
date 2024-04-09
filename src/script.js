@@ -34,6 +34,7 @@ let enemies = []
 let bonusArr = []
 let flyingEnemies = false
 let score = 0
+let index = 0
 
 startButton.addEventListener('click', characterSelection)
 
@@ -81,6 +82,8 @@ function loadBackground(source) {
 
 function startGame() {
   score = 0
+  let enemyCounter = 0
+  let createEnemyTimer = 3000
   const player = new Player(character, board)
   player.drawPlayer()
   loadBackground('road')
@@ -89,9 +92,9 @@ function startGame() {
   displayScore.innerText = `Score: ${score}`
   board.appendChild(displayScore)
   
-  setTimeout(changeMode, 30000)
+  setTimeout(changeMode, 10000)
   let gameTimer = setInterval(gameLoop, 50)
-  let enemyTimer = setInterval(enemyCreation, 3000)
+  let enemyTimer = setInterval(enemyCreation, createEnemyTimer)
   let bonusTimer = setInterval(bonusCreation, 5000)
   let speedTimer = setInterval(increaseSpeed, 30000)
   let scoreTimer = setInterval(sumScore, 100)
@@ -120,13 +123,30 @@ function startGame() {
 
   function increaseSpeed () {
     gameSpeed *= 1.5
+    clearInterval(enemyTimer)
+    createEnemyTimer -= 500
+    enemyTimer = setInterval(enemyCreation, createEnemyTimer);
   }
 
   function enemyCreation () {
+    let repeated = false
     const heights = [50, 200]
-    let index = 0
     if (flyingEnemies) {
-      index = Math.floor(Math.random() * heights.length)
+      const aux = Math.floor(Math.random() * heights.length)
+      if (aux === index) { 
+        console.log('repeated')
+        repeated = true 
+      }
+      index = aux
+    }
+    if (repeated) {
+      setTimeout(() => {
+        const enemy = new Enemy(heights[index === 0 ? 1 : 0], gameSpeed, board, player, enemies)
+        enemies.push(enemy)
+        enemy.drawEnemy()
+      }
+        , 1000)
+      repeated = false
     }
     const enemy = new Enemy(heights[index], gameSpeed, board, player, enemies)
     enemies.push(enemy)
@@ -143,6 +163,8 @@ function startGame() {
 
   function gameOver() {
     clearTimers()
+    flyingEnemies = false
+    gameSpeed = 10
     loadGameOverScreen()
     const retry = document.getElementById('retry-btn')
     retry.addEventListener('click', characterSelection)
