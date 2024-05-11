@@ -11,7 +11,7 @@ function Bonus (y, speed, parent, player, array) {
 
   this.checkCharacter = function () {
     if (player.character === 'tati') return 'chocolate'
-    if (player.character === 'juanan') return 'lp'
+    if (player.character === 'juanan') return 'coffee'
     return 'fish'
   }
   this.sprite.style.backgroundImage = `url(./assets/bonus/${this.checkCharacter()}.png`

@@ -43,10 +43,16 @@ function Player(character, parent) {
       this.force -= this.force * 0.6
       self.sprite.style.backgroundImage = `url(./assets/characters/${character}/jumping/up.png`;
     } else if (!this.collideFloor()) {
-      this.y = Math.max(this.y - this.fallSpeed, 50);
+      this.y = Math.max(this.y - this.fallSpeed, 50)
+      if (character !== 'tati') {
+        this.fallSpeed *= 1.1
+      }
       self.sprite.style.backgroundImage = `url(./assets/characters/${character}/jumping/down.png`;
     } else {
       this.jumping = false
+      if (character !== 'tati') {
+        this.fallSpeed = 25
+      }
       this.force = character === 'kimchi' ? 150 : 100
     }
     this.sprite.style.bottom = `${this.y}px`

@@ -29,12 +29,13 @@ window.addEventListener("load", function () {
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
 let character
-let gameSpeed = 10
+let gameSpeed = 12
 let enemies = []
 let bonusArr = []
 let flyingEnemies = false
 let score = 0
 let index = 0
+let repeatedTimer
 
 startButton.addEventListener('click', characterSelection)
 
@@ -92,7 +93,7 @@ function startGame() {
   displayScore.innerText = `Score: ${score}`
   board.appendChild(displayScore)
   
-  setTimeout(changeMode, 10000)
+  let modeTimer = setTimeout(changeMode, 10000)
   let gameTimer = setInterval(gameLoop, 50)
   let enemyTimer = setInterval(enemyCreation, createEnemyTimer)
   let bonusTimer = setInterval(bonusCreation, 5000)
@@ -134,13 +135,12 @@ function startGame() {
     if (flyingEnemies) {
       const aux = Math.floor(Math.random() * heights.length)
       if (aux === index) { 
-        console.log('repeated')
         repeated = true 
       }
       index = aux
     }
     if (repeated) {
-      setTimeout(() => {
+      repeatedTimer = setTimeout(() => {
         const enemy = new Enemy(heights[index === 0 ? 1 : 0], gameSpeed, board, player, enemies)
         enemies.push(enemy)
         enemy.drawEnemy()
@@ -164,13 +164,15 @@ function startGame() {
   function gameOver() {
     clearTimers()
     flyingEnemies = false
-    gameSpeed = 10
+    gameSpeed = 12
     loadGameOverScreen()
     const retry = document.getElementById('retry-btn')
     retry.addEventListener('click', characterSelection)
   }
 
   function clearTimers () {
+    clearTimeout(modeTimer)
+    clearTimeout(repeatedTimer)
     clearInterval(gameTimer)
     clearInterval(enemyTimer)
     clearInterval(speedTimer)
