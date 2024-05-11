@@ -13,6 +13,7 @@ function Enemy (y, speed, parent, player, array) {
     return this.y === 50 ? 'baby.png' : 'email.png'
   }
   this.sprite.style.backgroundImage = `url(./assets/enemies/${this.checkHeight()}`
+  this.sprite.style.backgroundSize = 'contain'
   
   this.drawEnemy = function () {
     this.sprite.style.left = `${this.x}px`
