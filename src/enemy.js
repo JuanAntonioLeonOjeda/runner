@@ -7,13 +7,21 @@ function Enemy (y, speed, parent, player, array) {
   this.height = 25
   this.sprite = document.createElement('div')
   this.sprite.classList.add('enemy')
-  this.sprite.style.backgroundSize = "cover";
+  this.sprite.style.backgroundSize = "cover"
+  this.babyFrame = 1
   
   this.checkHeight = function () {
-    return this.y === 50 ? 'baby.png' : 'email.png'
+    return this.y !== 50 ? 'baby1.png' : 'email.png'
   }
+
   this.sprite.style.backgroundImage = `url(./assets/enemies/${this.checkHeight()}`
+  if (this.checkHeight() === 'baby1.png') {
+    // this.sprite.style.rotate = 'y 180deg'
+    this.sprite.style.width = '70px'
+    this.sprite.style.height = '70px'
+  }
   this.sprite.style.backgroundSize = 'contain'
+
   
   this.drawEnemy = function () {
     this.sprite.style.left = `${this.x}px`
@@ -22,6 +30,17 @@ function Enemy (y, speed, parent, player, array) {
   }
 
   this.move = function () {
+    if (self.checkHeight().includes('baby')) {
+      if (self.babyFrame === 5) {
+        self.sprite.style.backgroundImage = `url(./assets/enemies/baby2.png`
+      } else if (self.babyFrame === 1) {
+        self.sprite.style.backgroundImage = `url(./assets/enemies/baby1.png`;
+      }
+      self.babyFrame++;
+      if (self.babyFrame > 10) {
+        self.babyFrame = 1
+      }
+    }
     self.x -= self.speed
     self.sprite.style.left = `${self.x}px`
     
