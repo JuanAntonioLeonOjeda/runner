@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
 let character
-let gameSpeed = 12
+let gameSpeed = 14
 let enemies = []
 let bonusArr = []
 let flyingEnemies = false
@@ -244,7 +244,7 @@ function startGame() {
     uploadButton.addEventListener('click', () => uploadScore(uploadButton))
   }
 
-board.addEventListener('mousedown', (e) => {
+board.addEventListener('mouseup', (e) => {
   console.log('down')
     e.preventDefault()
     if (!player.jumping) {
@@ -252,21 +252,21 @@ board.addEventListener('mousedown', (e) => {
     }
 })
 
-// board.addEventListener('mouseup', () => {
-//   console.log('up')
-//     if (player.jumping) {
-//       player.jumping = false
-//     }
-//   })
+board.addEventListener('mousedown', () => {
+  console.log('up')
+    if (player.jumping) {
+      player.jumping = false
+    }
+  })
   // board.addEventListener("contextmenu", (e) => {
   //   e.preventDefault()
   // })
-  board.addEventListener('touchend', () => {
+  board.addEventListener('touchstart', () => {
       if (player.jumping) {
         player.jumping = false
       }
   })
-  board.addEventListener("touchstart", (e) => {
+  board.addEventListener("touchend", (e) => {
     if (!player.jumping) {
       player.jumping = true;
     }
