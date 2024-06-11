@@ -244,15 +244,31 @@ function startGame() {
     uploadButton.addEventListener('click', () => uploadScore(uploadButton))
   }
 
-  board.addEventListener('click', () => {
+board.addEventListener('mousedown', (e) => {
+  console.log('down')
+    e.preventDefault()
     if (!player.jumping) {
       player.jumping = true
     }
-  })
+})
 
-  // board.addEventListener('touchend', () => {
-  //   if (player.jumping) {
-  //     player.jumping = false
-  //   }
-  // })
+// board.addEventListener('mouseup', () => {
+//   console.log('up')
+//     if (player.jumping) {
+//       player.jumping = false
+//     }
+//   })
+  board.addEventListener("contextmenu", (e) => {
+    e.preventDefault()
+  })
+  board.addEventListener('touchend', () => {
+      if (player.jumping) {
+        player.jumping = false
+      }
+  })
+  board.addEventListener("touchstart", (e) => {
+    if (!player.jumping) {
+      player.jumping = true;
+    }
+  })
 }
