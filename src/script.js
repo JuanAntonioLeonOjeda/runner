@@ -258,9 +258,9 @@ board.addEventListener('mousedown', (e) => {
 //       player.jumping = false
 //     }
 //   })
-  board.addEventListener("contextmenu", (e) => {
-    e.preventDefault()
-  })
+  // board.addEventListener("contextmenu", (e) => {
+  //   e.preventDefault()
+  // })
   board.addEventListener('touchend', () => {
       if (player.jumping) {
         player.jumping = false
