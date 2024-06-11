@@ -4,7 +4,7 @@ function Player(character, parent) {
   this.y = 50
   this.jumping = false
   this.force = character === 'kimchi' ? 150 : 80
-  this.fallSpeed = character === 'tati' ? 10 : 25
+  this.fallSpeed = character === 'tati' ? 10 : 30
   this.height = character === 'kimchi' ? 50 : 100
   this.width = character === 'kimchi' ? 50 : 90
   this.isDead = false
@@ -51,7 +51,7 @@ function Player(character, parent) {
     } else {
       this.jumping = false
       if (character !== 'tati') {
-        this.fallSpeed = 25
+        this.fallSpeed = 30
       }
       this.force = character === 'kimchi' ? 150 : 100
     }
