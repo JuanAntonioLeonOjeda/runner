@@ -48,7 +48,7 @@ function Enemy (y, speed, parent, player, array) {
       player.isDead = true
     }
 
-    if (self.x <= 0) {
+    if (self.x + self.width + 25 < 0) {
       self.removeEnemy()
     }
   }

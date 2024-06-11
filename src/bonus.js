@@ -32,7 +32,7 @@ function Bonus (y, speed, parent, player, array) {
     if (self.playerCollision()) {
       self.removeBonus()
       player.sumBonus = true
-    } else if (self.x <= 0) {
+    } else if (self.x + self.width < 0) {
       self.removeBonus()
     }
   }
