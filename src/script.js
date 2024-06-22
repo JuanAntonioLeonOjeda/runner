@@ -22,9 +22,7 @@ window.addEventListener("load", function () {
   setTimeout(function () {
     window.scrollTo(0, 1);
   }, 0);
-});
-
-// You can call this function on a user action, like a button click
+})
 
 const board = document.getElementById('main')
 const startButton = document.getElementsByClassName('start-button')[0]
@@ -37,7 +35,7 @@ let score = 0
 let index = 0
 let repeatedTimer
 
-startButton.addEventListener('click', characterSelection)
+startButton.addEventListener('touchstart', characterSelection)
 
 function removeChildren(element) {
   while (element.firstChild) {
@@ -51,7 +49,7 @@ function characterSelection() {
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')
   for (let i = 0; i < options.length; i++) {
-    options[i].addEventListener('click', (e) => {
+    options[i].addEventListener('touchstart', (e) => {
       e.stopPropagation()
       switch (i) {
         case 0:
@@ -164,10 +162,10 @@ function startGame() {
   function gameOver() {
     clearTimers()
     flyingEnemies = false
-    gameSpeed = 12
+    gameSpeed = 14
     loadGameOverScreen()
     const retry = document.getElementById('retry-btn')
-    retry.addEventListener('click', characterSelection)
+    retry.addEventListener('touchstart', characterSelection)
   }
 
   function clearTimers () {
@@ -184,7 +182,7 @@ function startGame() {
     bonusArr.forEach(bonus => {
       clearInterval(bonus.timerId)
     })
-    gameSpeed = 10
+    gameSpeed = 14
   }
 
   async function loadTopScores () {
@@ -241,7 +239,7 @@ function startGame() {
     const totalScore = document.querySelector('.total-score')
     totalScore.innerText = score
     const uploadButton = document.querySelector('#upload-btn')
-    uploadButton.addEventListener('click', () => uploadScore(uploadButton))
+    uploadButton.addEventListener('touchstart', () => uploadScore(uploadButton))
   }
 
 // board.addEventListener('mouseup', (e) => {
@@ -272,7 +270,7 @@ function startGame() {
 //     }
 //   })
 let pressTimer;
-const holdDuration = 500; // Duration in milliseconds to detect a held press
+const holdDuration = 1; // Duration in milliseconds to detect a held press
 
 // Prevent the context menu from appearing on long press
 board.addEventListener("contextmenu", (e) => {
@@ -307,7 +305,7 @@ board.addEventListener("mouseleave", () => {
 board.addEventListener("touchstart", (e) => {
   e.preventDefault();
   pressTimer = setTimeout(() => {
-    if (score > 0 && !player.jumping) {
+    if (!player.jumping) {
       player.jumping = true;
     }
   }, holdDuration);
@@ -316,7 +314,13 @@ board.addEventListener("touchstart", (e) => {
 board.addEventListener("touchend", () => {
   clearTimeout(pressTimer);
   if (player.jumping) {
-    player.jumping = false;
+    const reduceForceGradually = setInterval(() => {
+      if (player.force > 0.1) {
+        player.force -= 50
+      } else {
+        clearInterval(reduceForceGradually);
+      }
+    }, 10)
   }
-});
+})
 }
