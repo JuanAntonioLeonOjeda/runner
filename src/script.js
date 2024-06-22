@@ -70,8 +70,9 @@ function characterSelection() {
 
 function loadCharacterScreen() {
   board.innerHTML = characterScreen
-  board.style.backgroundImage = 'none'
-  board.style.backgroundColor = 'gray'
+  board.style.backgroundImage = 'url(./assets/backgrounds/background.png)'
+  board.style.backgroundSize = 'cover'
+  // board.style.backgroundColor = 'gray'
 }
 
 function loadBackground(source) {
@@ -234,8 +235,8 @@ function startGame() {
      if (!input.value) {
       input.value = localStorage.getItem('user')
      }
-    board.style.background = 'none'
-    board.style.backgroundColor = 'grey'
+    board.style.backgroundImage = 'url(./assets/backgrounds/background.png)'
+    board.style.backgroundSize = "cover"
     const totalScore = document.querySelector('.total-score')
     totalScore.innerText = score
     const uploadButton = document.querySelector('#upload-btn')
