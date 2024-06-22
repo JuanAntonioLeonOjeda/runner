@@ -25,7 +25,7 @@ window.addEventListener("load", function () {
 })
 
 const board = document.getElementById('main')
-const startButton = document.getElementsByClassName('start-button')[0]
+const startButton = document.querySelector('.start-button button')
 let character
 let gameSpeed = 14
 let enemies = []
