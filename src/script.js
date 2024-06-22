@@ -244,31 +244,79 @@ function startGame() {
     uploadButton.addEventListener('click', () => uploadScore(uploadButton))
   }
 
-board.addEventListener('mouseup', (e) => {
-  console.log('down')
-    e.preventDefault()
-    if (!player.jumping) {
-      player.jumping = true
-    }
-})
+// board.addEventListener('mouseup', (e) => {
+//   console.log('down')
+//     e.preventDefault()
+//     if (!player.jumping) {
+//       player.jumping = true
+//     }
+// })
 
-board.addEventListener('mousedown', () => {
-  console.log('up')
-    if (player.jumping) {
-      player.jumping = false
-    }
-  })
-  // board.addEventListener("contextmenu", (e) => {
-  //   e.preventDefault()
-  // })
-  board.addEventListener('touchstart', () => {
-      if (player.jumping) {
-        player.jumping = false
-      }
-  })
-  board.addEventListener("touchend", (e) => {
+// board.addEventListener('mousedown', () => {
+//   console.log('up')
+//     if (player.jumping) {
+//       player.jumping = false
+//     }
+//   })
+//   // board.addEventListener("contextmenu", (e) => {
+//   //   e.preventDefault()
+//   // })
+//   board.addEventListener('touchend', () => {
+//       if (player.jumping) {
+//         player.jumping = false
+//       }
+//   })
+//   board.addEventListener("touchstart", (e) => {
+//     if (!player.jumping) {
+//       player.jumping = true;
+//     }
+//   })
+let pressTimer;
+const holdDuration = 500; // Duration in milliseconds to detect a held press
+
+// Prevent the context menu from appearing on long press
+board.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+// Handle mouse events for jumping
+board.addEventListener("mousedown", (e) => {
+  e.preventDefault();
+  pressTimer = setTimeout(() => {
     if (!player.jumping) {
       player.jumping = true;
     }
-  })
+  }, holdDuration);
+});
+
+board.addEventListener("mouseup", () => {
+  clearTimeout(pressTimer);
+  if (player.jumping) {
+    player.jumping = false;
+  }
+});
+
+board.addEventListener("mouseleave", () => {
+  clearTimeout(pressTimer);
+  if (player.jumping) {
+    player.jumping = false;
+  }
+});
+
+// Handle touch events for jumping
+board.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  pressTimer = setTimeout(() => {
+    if (score > 0 && !player.jumping) {
+      player.jumping = true;
+    }
+  }, holdDuration);
+});
+
+board.addEventListener("touchend", () => {
+  clearTimeout(pressTimer);
+  if (player.jumping) {
+    player.jumping = false;
+  }
+});
 }
