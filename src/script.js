@@ -278,28 +278,36 @@ board.addEventListener("contextmenu", (e) => {
 });
 
 // Handle mouse events for jumping
-board.addEventListener("mousedown", (e) => {
-  e.preventDefault();
-  pressTimer = setTimeout(() => {
-    if (!player.jumping) {
-      player.jumping = true;
-    }
-  }, holdDuration);
-});
+// board.addEventListener("mousedown", (e) => {
+//   e.preventDefault();
+//   pressTimer = setTimeout(() => {
+//     if (!player.jumping) {
+//       player.jumping = true;
+//     }
+//   }, holdDuration);
+// });
 
-board.addEventListener("mouseup", () => {
-  clearTimeout(pressTimer);
-  if (player.jumping) {
-    player.jumping = false;
-  }
-});
+// board.addEventListener("mouseup", () => {
+//   e.preventDefault();
+//   pressTimer = setTimeout(() => {
+//     if (!player.jumping) {
+//       player.jumping = true;
+//     }
+//   }, holdDuration);
+// });
 
-board.addEventListener("mouseleave", () => {
-  clearTimeout(pressTimer);
-  if (player.jumping) {
-    player.jumping = false;
-  }
-});
+// board.addEventListener("mouseleave", () => {
+//   clearTimeout(pressTimer);
+//   if (player.jumping) {
+//     const reduceForceGradually = setInterval(() => {
+//       if (player.force > 0.1) {
+//         player.force -= 100;
+//       } else {
+//         clearInterval(reduceForceGradually);
+//       }
+//     }, 10);
+//   }
+// });
 
 // Handle touch events for jumping
 board.addEventListener("touchstart", (e) => {
@@ -316,11 +324,11 @@ board.addEventListener("touchend", () => {
   if (player.jumping) {
     const reduceForceGradually = setInterval(() => {
       if (player.force > 0.1) {
-        player.force -= 50
+        player.force -= 2
       } else {
         clearInterval(reduceForceGradually);
       }
-    }, 10)
+    }, 15)
   }
 })
 }
