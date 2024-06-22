@@ -4,27 +4,33 @@ const characterScreen = `
   </section>
   <section id="characters">
     <div class="character-select">
-      <h3>Tati</h3>
+      <h3 class="name">Tati</h3>
       <div class="container">
         <img class="person" src="./assets/characters/tati/main.png">
       </div>
-      <p>Cae más lento</p>
+      <div class="text-container">
+        <span class="text">Cae más lento</span>
+      </div>
     </div>
     <div class="character-select">
-      <h3>Juanan</h3>
+      <h3 class="name">Juanan</h3>
       <div class="container">
         <img class="person" src="./assets/characters/juanan/main.png">
       </div>
-      <p>No hace nada especial pero suenan temazos</p>
+      <div class="text-container">
+        <span class="text">No hace nada especial pero suenan temazos</span>
+      </div>
     </div>
     <div class="character-select">
-      <h3>Kimchi</h3>
+      <h3 class="name">Kimchi</h3>
       <div class="container">
         <div class="kimchi" ></div>
       </div>
-      <p>Salta más alto</p>
+      <div class="text-container">
+        <span class="text">Salta más alto</span>
+      </div>
     </div>
   </section>
-`
+`;
 
 export { characterScreen }

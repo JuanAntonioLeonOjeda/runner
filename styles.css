@@ -100,7 +100,7 @@ h3 {
   align-items: center;
 }
 
-.character-select p {
+.text {
   font-size: calc(10px + 1vw);
   line-height: calc(1.1em + 0.5vw);
 }
@@ -231,4 +231,19 @@ h3 {
   background-repeat: no-repeat;
   width: 50px;
   height: 60px;
+}
+
+.name {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.text-container {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 2px;
+  height: 'fit content'
 }
