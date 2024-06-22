@@ -48,6 +48,12 @@ function characterSelection() {
   removeChildren(board)
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')
+  const help = document.getElementById('help')
+  const helpIcon = document.querySelector('.help-icon')
+  help.addEventListener('touchstart', () => {
+    help.style.visibility = 'visible'
+  })
+
   for (let i = 0; i < options.length; i++) {
     options[i].addEventListener('touchstart', (e) => {
       e.stopPropagation()

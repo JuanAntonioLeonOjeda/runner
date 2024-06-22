@@ -1,6 +1,9 @@
 const characterScreen = `
   <section class="title-container">
     <h1 class="title">Elige tu personaje</h1>
+    <div class="help-icon">
+      Aiuda
+    </div>
   </section>
   <section id="characters">
     <div class="character-select">
@@ -30,6 +33,9 @@ const characterScreen = `
         <span class="text">Salta más alto</span>
       </div>
     </div>
+  </section>
+  <section id="help">
+    DE LOCOS
   </section>
 `;
 
