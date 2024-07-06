@@ -3,6 +3,7 @@ body {
   margin: 0;
   font-size: calc(16px + 1vw);
   line-height: calc(1.1em + 0.5vw);
+  overflow-y: hidden;
 }
 
 h3 {
@@ -22,10 +23,17 @@ h3 {
   display: none;
 }
 
+.rotate {
+  display: none;
+}
+
 /* Show game only in landscape/horizontal orientation */
 @media only screen and (orientation: landscape) {
   #main {
     display: block;
+  }
+  .rotate {
+    display: none;
   }
 }
 
@@ -39,6 +47,10 @@ h3 {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+  }
+  .rotate {
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -190,7 +202,7 @@ h3 {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-    pointer-events: none;
+  pointer-events: none;
 }
 
 #retry-btn {
@@ -200,6 +212,7 @@ h3 {
   font-size: 16px;
   margin-top: 5vh;
   min-width: 200px;
+  max-width: 250px;
   max-height: 50px;
   pointer-events: auto;
 }
@@ -211,6 +224,7 @@ h3 {
   font-size: 16px;
   margin-top: 5vh;
   min-width: 200px;
+  max-width: 250px;
   max-height: 50px;
 }
 
@@ -224,6 +238,10 @@ h3 {
 .input {
   display: flex;
   align-items: center;
+}
+
+#name-input {
+  z-index: 99999;
 }
 
 .hourglass {
