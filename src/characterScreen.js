@@ -36,12 +36,32 @@ const characterScreen = `
   </section>
   <section id="help-section">
     <div id="help-title">
-      <p>
+      <p id="help-title-text">
         AYUDA
       </p>
       <p id="close-help">
         [X]
       </p>
+    </div>
+    <div id="help-intro">
+      <p class="help-text">
+        Llegamos tarde a la boda! Ayúdanos a llegar a tiempo esquivando los obstáculos!
+      </p>
+      <div class="icons-display">
+        <img src="./assets/enemies/email.png" alt="email">
+        <img src="./assets/enemies/baby1.png" alt="baby">
+      </div>
+      <p class="help-text">
+        Pulsa sobre la pantalla para saltar. Cuanto más tiempo dejes pulsado, más saltarás.
+      </p>
+      <p class="help-text">
+      Coge los objetos de bonus para conseguir más puntos.
+      </p>
+      <div class="icons-display">
+        <img src="./assets/bonus/chocolate.png" alt="chocolate">
+        <img src="./assets/bonus/coffee.png" alt="coffee">
+        <img src="./assets/bonus/fish.png" alt="fish">
+      </div>
     </div>
   </section>
 `;

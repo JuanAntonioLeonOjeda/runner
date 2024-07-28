@@ -12,10 +12,10 @@ html, body {
   margin: auto;
   }
   
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h3 {
@@ -295,6 +295,7 @@ h3 {
   width: 90%;
   height: 80%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   z-index: 50;
   border: 5px solid black;
@@ -323,10 +324,27 @@ h3 {
   position: relative;
 }
 
+#help-title-text {
+  margin-bottom: 0;
+}
+
 #close-help {
   width: fit-content;
   height: fit-content;
   position: absolute;
   right: 5%;
   color: red;
+}
+
+.help-text {
+  margin-left: 2%;
+  font-size: calc(16px + 0.2vw);
+  line-height: calc(1.1em + 0.5vw);
+  margin-bottom: 0;
+}
+
+.icons-display {
+  display: flex;
+  justify-content: center;
+  height: 40px;
 }
