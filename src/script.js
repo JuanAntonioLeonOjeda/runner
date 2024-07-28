@@ -49,18 +49,17 @@ function characterSelection() {
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')
   const helpSection = document.getElementById('help-section')
-  let isVisible = localStorage.hasPlayed ? false : true
-  if (isVisible) {
-    helpSection.style.visibility = "visible"
-  }
+  const closeHelp = document.getElementById('close-help')
+  let isVisible = !localStorage.hasPlayed
+  if (isVisible) helpSection.style.visibility = "visible"
   const helpIcon = document.querySelector('.help-icon')
+  
   helpIcon.addEventListener('touchstart', () => {
-    if (isVisible) {
-      helpSection.style.visibility = 'visible'
-    } else {
-      helpSection.style.visibility = 'hidden'
-    }
-    isVisible = !isVisible
+    helpSection.style.visibility = 'visible'
+  })
+
+  closeHelp.addEventListener("touchstart", () => {
+    helpSection.style.visibility = "hidden"
   })
 
   for (let i = 0; i < options.length; i++) {

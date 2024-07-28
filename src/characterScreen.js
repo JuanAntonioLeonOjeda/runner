@@ -35,7 +35,14 @@ const characterScreen = `
     </div>
   </section>
   <section id="help-section">
-    DE LOCOS
+    <div id="help-title">
+      <p>
+        AYUDA
+      </p>
+      <p id="close-help">
+        [X]
+      </p>
+    </div>
   </section>
 `;
 

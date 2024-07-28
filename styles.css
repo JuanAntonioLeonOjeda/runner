@@ -293,13 +293,15 @@ h3 {
 #help-section {
   visibility: hidden;
   width: 90%;
-  height: 75%;
+  height: 80%;
   display: flex;
   justify-content: center;
   z-index: 50;
   border: 5px solid black;
+  border-radius: 15px;
   position: absolute;
-  top: 5px;
+  top: 10%;
+  left: 5%;
   background-color: lightblue;
 }
 
@@ -312,4 +314,19 @@ h3 {
   width: 100px;
   height: auto;
   padding-top: 10vh;
+}
+
+#help-title {
+  display: flex;
+  justify-content: center;
+  width: 90vw;
+  position: relative;
+}
+
+#close-help {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 5%;
+  color: red;
 }
