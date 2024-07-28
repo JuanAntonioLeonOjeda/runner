@@ -18,11 +18,11 @@ import { getTopTen, insertUser, getAllPlayers } from "./fireStoreQueries.js"
 //     }
 // }
 
-window.addEventListener("load", function () {
-  setTimeout(function () {
-    window.scrollTo(0, document.body.scrollHeight);
-  }, 0);
-})
+// window.addEventListener("load", function () {
+//   setTimeout(function () {
+//     window.scrollTo(0, document.body.scrollHeight);
+//   }, 0);
+// })
 
 const board = document.getElementById('main')
 const startButton = document.querySelector('.start-button button')

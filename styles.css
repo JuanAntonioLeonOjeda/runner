@@ -6,7 +6,7 @@ html, body {
   font-family: 'Press Start 2P', sans-serif;
   font-size: calc(16px + 1vw);
   line-height: calc(1.1em + 0.5vw);
-  overflow: hidden;
+  overflow: scroll;
   height: 100vh;
   width: 100vw;
   margin: auto;
