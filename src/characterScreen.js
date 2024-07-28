@@ -1,8 +1,8 @@
 const characterScreen = `
   <section class="title-container">
-    <h1 class="title">Elige tu personaje</h1>
-    <div class="help-icon">
-      Aiuda
+    <h1 class="title">Elige personaje</h1>
+    <div class="help-container">
+      <img class="help-icon" src="./assets/question.png" alt="Ayuda">
     </div>
   </section>
   <section id="characters">
@@ -21,7 +21,7 @@ const characterScreen = `
         <img class="person" src="./assets/characters/juanan/main.png">
       </div>
       <div class="text-container">
-        <span class="text">No hace nada especial pero suenan temazos</span>
+        <span class="text">Suenan temazos</span>
       </div>
     </div>
     <div class="character-select">
@@ -34,7 +34,7 @@ const characterScreen = `
       </div>
     </div>
   </section>
-  <section id="help">
+  <section id="help-section">
     DE LOCOS
   </section>
 `;

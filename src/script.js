@@ -48,10 +48,19 @@ function characterSelection() {
   removeChildren(board)
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')
-  const help = document.getElementById('help')
+  const helpSection = document.getElementById('help-section')
+  let isVisible = localStorage.hasPlayed ? false : true
+  if (isVisible) {
+    helpSection.style.visibility = "visible"
+  }
   const helpIcon = document.querySelector('.help-icon')
-  help.addEventListener('touchstart', () => {
-    help.style.visibility = 'visible'
+  helpIcon.addEventListener('touchstart', () => {
+    if (isVisible) {
+      helpSection.style.visibility = 'visible'
+    } else {
+      helpSection.style.visibility = 'hidden'
+    }
+    isVisible = !isVisible
   })
 
   for (let i = 0; i < options.length; i++) {
@@ -78,15 +87,16 @@ function loadCharacterScreen() {
   board.innerHTML = characterScreen
   board.style.backgroundImage = 'url(./assets/backgrounds/background.png)'
   board.style.backgroundSize = 'cover'
-  // board.style.backgroundColor = 'gray'
 }
 
 function loadBackground(source) {
   board.style.backgroundImage = `url(./assets/backgrounds/${source}.gif)`
   board.style.backgroundSize = 'contain'
+  board.style.backgroundRepeat = 'repeat'
 }
 
 function startGame() {
+  localStorage.hasPlayed = true
   score = 0
   let enemyCounter = 0
   let createEnemyTimer = 3000
