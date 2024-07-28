@@ -6,17 +6,17 @@ import { Bonus } from "./bonus.js"
 
 import { getTopTen, insertUser, getAllPlayers } from "./fireStoreQueries.js"
 
-// function goFullScreen() {
-//     if (document.documentElement.requestFullscreen) {
-//         document.documentElement.requestFullscreen();
-//     } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
-//         document.documentElement.mozRequestFullScreen();
-//     } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-//         document.documentElement.webkitRequestFullscreen();
-//     } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
-//         document.documentElement.msRequestFullscreen();
-//     }
-// }
+function goFullScreen() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+        document.documentElement.msRequestFullscreen();
+    }
+}
 
 window.addEventListener("load", function () {
   setTimeout(function () {
@@ -44,7 +44,7 @@ function removeChildren(element) {
 }
 
 function characterSelection() {
-  //goFullScreen()
+  goFullScreen()
   removeChildren(board)
   loadCharacterScreen()
   const options = document.getElementsByClassName('character-select')

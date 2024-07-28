@@ -322,6 +322,7 @@ h3 {
   justify-content: center;
   width: 90vw;
   position: relative;
+  margin-bottom: 10px;
 }
 
 #help-title-text {
