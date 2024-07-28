@@ -57,7 +57,7 @@ h3 {
     content: "Rota tu móvil en horizontal para jugar!";
     display: block;
     position: absolute;
-    top: 60%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
