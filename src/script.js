@@ -327,7 +327,7 @@ board.addEventListener("contextmenu", (e) => {
 
 // Handle touch events for jumping
 board.addEventListener("touchstart", (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   pressTimer = setTimeout(() => {
     if (!player.jumping) {
       player.jumping = true;

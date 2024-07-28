@@ -37,7 +37,7 @@ const characterScreen = `
   <section id="help-section">
     <div id="help-title">
       <p id="help-title-text">
-        AYUDA
+        ¿CÓMO JUGAR?
       </p>
       <p id="close-help">
         [X]
