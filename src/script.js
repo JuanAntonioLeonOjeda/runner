@@ -20,14 +20,15 @@ import { getTopTen, insertUser, getAllPlayers } from "./fireStoreQueries.js"
 
 // window.addEventListener("load", function () {
 //   setTimeout(function () {
-//     window.scrollTo(0, document.body.scrollHeight);
+//     window.scrollTo(0, document.body.scrollHeight);{}
 //   }, 0);
 // })
 
 const board = document.getElementById('main')
+if (board.requestFullscreen) board.requestFullscreen()
 const startButton = document.querySelector('.start-button button')
 let character
-let gameSpeed = 14
+let gameSpeed = 20
 let enemies = []
 let bonusArr = []
 let flyingEnemies = false
@@ -94,6 +95,8 @@ function loadBackground(source) {
   board.style.backgroundRepeat = 'repeat'
 }
 
+let isCreating = false
+
 function startGame() {
   localStorage.hasPlayed = true
   score = 0
@@ -144,41 +147,79 @@ function startGame() {
   }
 
   function enemyCreation () {
-    let repeated = false
-    const heights = [50, 200]
-    if (flyingEnemies) {
-      const aux = Math.floor(Math.random() * heights.length)
-      if (aux === index) { 
-        repeated = true 
+    if (!isCreating) {
+      isCreating = true
+      let repeated = false
+      const heights = [50, 200]
+
+      if (flyingEnemies) {
+        const aux = Math.floor(Math.random() * heights.length)
+        if (aux === index) {
+          repeated = true
+        }
+        index = aux
       }
-      index = aux
-    }
-    if (repeated) {
-      repeatedTimer = setTimeout(() => {
-        const enemy = new Enemy(heights[index === 0 ? 1 : 0], gameSpeed, board, player, enemies)
-        enemies.push(enemy)
-        enemy.drawEnemy()
+
+      if (repeated) {
+        repeatedTimer = setTimeout(() => {
+          const enemy = new Enemy(
+            heights[index === 0 ? 1 : 0],
+            gameSpeed,
+            board,
+            player,
+            enemies
+          )
+          enemies.push(enemy)
+          enemy.drawEnemy()
+        }, 1000)
+        repeated = false;
       }
-        , 1000)
-      repeated = false
+
+      const enemy = new Enemy(
+        heights[index],
+        gameSpeed,
+        board,
+        player,
+        enemies
+      )
+
+      enemies.push(enemy)
+      enemy.drawEnemy()
+
+      setTimeout(() => {
+        isCreating = false
+      }, 1000)
     }
-    const enemy = new Enemy(heights[index], gameSpeed, board, player, enemies)
-    enemies.push(enemy)
-    enemy.drawEnemy()
+    
   }
 
   function bonusCreation() {
-    const heights = [100, 200]
-    let index = Math.floor(Math.random() * heights.length)
-    const bonus = new Bonus(heights[index], gameSpeed, board, player, bonusArr)
-    bonusArr.push(bonus)
-    bonus.drawBonus()
+    if (!isCreating) {
+      isCreating = true
+      const heights = [100, 200]
+      let index = Math.floor(Math.random() * heights.length)
+
+      const bonus = new Bonus(
+        heights[index],
+        gameSpeed,
+        board,
+        player,
+        bonusArr
+      )
+
+      bonusArr.push(bonus)
+      bonus.drawBonus()
+
+      setTimeout(() => {
+        isCreating = false
+      }, 1000)
+    }
+    
   }
 
   function gameOver() {
     clearTimers()
     flyingEnemies = false
-    gameSpeed = 14
     loadGameOverScreen()
     const retry = document.getElementById('retry-btn')
     retry.addEventListener('touchstart', characterSelection)
@@ -198,7 +239,7 @@ function startGame() {
     bonusArr.forEach(bonus => {
       clearInterval(bonus.timerId)
     })
-    gameSpeed = 14
+    gameSpeed = 20
   }
 
   async function loadTopScores () {
