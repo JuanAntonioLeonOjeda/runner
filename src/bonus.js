@@ -8,6 +8,7 @@ function Bonus (y, speed, parent, player, array) {
   this.sprite = document.createElement('div')
   this.sprite.classList.add('bonus')
   this.sprite.style.backgroundSize = 'contain'
+  this.sound = new Audio('assets/sounds/1up.wav')
 
   this.checkCharacter = function () {
     if (player.character === 'tati') return 'chocolate'
@@ -28,6 +29,7 @@ function Bonus (y, speed, parent, player, array) {
     self.sprite.style.left = `${self.x}px`
     
     if (self.playerCollision()) {
+      self.sound.play()
       self.removeBonus()
       player.sumBonus = true
     } else if (self.x + self.width < 0) {

@@ -1,7 +1,7 @@
 const gameOverScreen = `
   <section class="game-over">
     <h3 class="title">Game Over</h3>
-    <section>
+    <section class="score-text">
       Puntuación: <span class="total-score"></span>
     </section>
     <section class="input">

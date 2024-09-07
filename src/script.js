@@ -4,7 +4,16 @@ import { Player } from './player.js'
 import { Enemy } from './enemy.js'
 import { Bonus } from "./bonus.js"
 
-import { getTopTen, insertUser, getAllPlayers } from "./fireStoreQueries.js"
+import { 
+  getTopTen, 
+  insertUser, 
+  getAllPlayers 
+} from "./fireStoreQueries.js"
+
+const sounds = {
+  success: new Audio("assets/sounds/treasure.wav"),
+  gameOver: new Audio("assets/sounds/Game Over.wav")
+};
 
 // function goFullScreen() {
 //     if (document.documentElement.requestFullscreen) {
@@ -238,6 +247,7 @@ function startGame() {
   }
 
   function gameOver() {
+    sounds.gameOver.play()
     clearTimers()
     flyingEnemies = false
     doubleEnemies = false
@@ -275,6 +285,7 @@ function startGame() {
         container.innerText = `${player.name}: ${player.score}`
         list.appendChild(container)
       })
+      sounds.success.play()
     } catch (error) {
       console.error(error)
     }
@@ -388,14 +399,25 @@ board.addEventListener("contextmenu", (e) => {
 //   }
 // });
 
+function playJumpSound() {
+  const jumpSound = new Audio("assets/sounds/Jump.wav");
+
+  jumpSound.play();
+
+  jumpSound.addEventListener("ended", () => {
+    jumpSound.remove()
+  })
+}
 // Handle touch events for jumping
 board.addEventListener("touchstart", (e) => {
   if (!player.isDead) {
     e.preventDefault()
   }
   pressTimer = setTimeout(() => {
-    if (!player.jumping) {
+    if (!player.jumping && !player.isDead) {
+      playJumpSound()
       player.jumping = true;
+      
     }
   }, holdDuration);
 });

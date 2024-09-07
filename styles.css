@@ -31,7 +31,7 @@ h3 {
   max-height: 550px;
   background-image: url('./assets/backgrounds/title/title.png');
   background-size: 100% auto;
-  background-position: center;
+  background-position: top;
   background-repeat:no-repeat;
   position: relative;
   display: none;
@@ -93,10 +93,11 @@ h3 {
   padding: 20px;
   padding-top: 30px;
   text-align: center;
-  margin: 0 auto;
-  background-color: lightblue;
+  margin: 100px auto 0 auto;
+  background-color: lightgreen;
   width: fit-content;
   border-radius: 15px;
+  border: 5px solid black;
 }
 
 @media (max-width: 700px) {
@@ -120,7 +121,7 @@ h3 {
   margin-top: 5vh;
   min-width: 200px;
   max-height: 50px;
-  background-color: lightblue;
+  background-color: lightgreen;
   border: 3px solid black;
   border-radius: 15px;
 }
@@ -235,6 +236,7 @@ h3 {
   max-width: 250px;
   max-height: 50px;
   pointer-events: auto;
+  background-color: lightgreen;
 }
 
 #upload-btn {
@@ -246,13 +248,18 @@ h3 {
   min-width: 200px;
   max-width: 250px;
   max-height: 50px;
+  background-color: lightgreen;
 }
 
 .top-title {
   margin-top: 5vh;
+  padding: 5px 10px;
+  border-radius: 5%;
+  border: 1px solid black;
   display: none;
   flex-direction: column;
   align-items: center;
+  background-color: lightgreen;
 }
 
 .input {
@@ -274,7 +281,7 @@ h3 {
 }
 
 .name {
-  background-color: white;
+  background-color: lightgreen;
   border: 1px solid black;
   border-radius: 5px;
   padding: 2px;
@@ -283,7 +290,7 @@ h3 {
 }
 
 .text-container {
-  background-color: white;
+  background-color: lightgreen;
   border: 1px solid black;
   border-radius: 5px;
   padding: 2px;
@@ -305,7 +312,7 @@ h3 {
   position: absolute;
   top: 10%;
   left: 5%;
-  background-color: lightblue;
+  background-color: lightgreen;
 }
 
 .help-container {
@@ -368,4 +375,11 @@ h3 {
 
 .text-warning {
   color: red;
+}
+
+.score-text {
+  background-color: lightgreen;
+  border-radius: 15px;
+  padding: 5px 10px;
+  border: 1px solid black;
 }
