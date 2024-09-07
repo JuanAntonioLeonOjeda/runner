@@ -97,7 +97,7 @@ h3 {
   background-color: lightgreen;
   width: fit-content;
   border-radius: 15px;
-  border: 5px solid black;
+  border: 5px solid darkgreen;
 }
 
 @media (max-width: 700px) {
@@ -122,7 +122,7 @@ h3 {
   min-width: 200px;
   max-height: 50px;
   background-color: lightgreen;
-  border: 3px solid black;
+  border: 3px solid darkgreen;
   border-radius: 15px;
 }
 
@@ -255,7 +255,7 @@ h3 {
   margin-top: 5vh;
   padding: 5px 10px;
   border-radius: 5%;
-  border: 1px solid black;
+  border: 3px solid darkgreen;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -282,7 +282,7 @@ h3 {
 
 .name {
   background-color: lightgreen;
-  border: 1px solid black;
+  border: 3px solid darkgreen;
   border-radius: 5px;
   padding: 2px;
   padding-top: 8px;
@@ -291,7 +291,7 @@ h3 {
 
 .text-container {
   background-color: lightgreen;
-  border: 1px solid black;
+  border: 3px solid darkgreen;
   border-radius: 5px;
   padding: 2px;
   height: 'fit content';
@@ -307,7 +307,7 @@ h3 {
   flex-direction: column;
   justify-content: center;
   z-index: 50;
-  border: 5px solid black;
+  border: 5px solid darkgreen;
   border-radius: 15px;
   position: absolute;
   top: 10%;
@@ -381,5 +381,5 @@ h3 {
   background-color: lightgreen;
   border-radius: 15px;
   padding: 5px 10px;
-  border: 1px solid black;
+  border: 3px solid darkgreen;
 }
