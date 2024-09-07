@@ -52,7 +52,7 @@ const characterScreen = `
         <img src="./assets/enemies/baby1.png" alt="baby">
       </div>
       <p class="help-text">
-        Pulsa sobre la pantalla para saltar. Cuanto más tiempo dejes pulsado, más saltarás.
+        Pulsa sobre la pantalla para saltar. <span class="text-warning">Cuanto más tiempo dejes pulsado, más saltarás.</span>
       </p>
       <p class="help-text">
       Coge los objetos de bonus para conseguir más puntos.

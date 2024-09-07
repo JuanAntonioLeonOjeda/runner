@@ -365,3 +365,7 @@ h3 {
   justify-content: center;
   height: 40px;
 }
+
+.text-warning {
+  color: red;
+}

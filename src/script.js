@@ -341,8 +341,8 @@ board.addEventListener("touchend", () => {
   clearTimeout(pressTimer);
   if (player.jumping) {
     const reduceForceGradually = setInterval(() => {
-      if (player.force > 0.1) {
-        player.force -= 2
+      if (player.force > 0.01) {
+        player.force -= 1
       } else {
         clearInterval(reduceForceGradually);
       }
