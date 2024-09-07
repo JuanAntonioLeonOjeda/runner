@@ -9,9 +9,17 @@ function Enemy (y, speed, parent, player, array) {
   this.sprite.classList.add('enemy')
   this.sprite.style.backgroundSize = "cover"
   this.babyFrame = 1
+
   
   this.checkHeight = function () {
-    return this.y !== 50 ? 'baby1.png' : 'email.png'
+    return this.y !== 50 ? 
+      player.character === 'kimchi' ? 
+        'carrier.png' : 
+        'baby1.png'
+      : 
+      player.character === 'kimchi' ? 
+       'roomba.png' :
+       'email.png'
   }
 
   this.sprite.style.backgroundImage = `url(./assets/enemies/${this.checkHeight()}`
