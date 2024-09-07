@@ -50,6 +50,8 @@ const characterScreen = `
       <div class="icons-display">
         <img src="./assets/enemies/email.png" alt="email">
         <img src="./assets/enemies/baby1.png" alt="baby">
+        <img src="./assets/enemies/carrier.png" alt="carrier">
+        <img src="./assets/enemies/roomba.png" alt="roomba">
       </div>
       <p class="help-text">
         Pulsa sobre la pantalla para saltar. <span class="text-warning">Cuanto más tiempo dejes pulsado, más saltarás.</span>

@@ -1,7 +1,7 @@
 function Bonus (y, speed, parent, player, array) {
   let self = this
   this.x = window.innerWidth
-  this.y = y
+  this.y = player.character === 'kimchi' ? y - 30 : y
   this.speed = speed
   this.width = 25
   this.height = player.character === 'kimchi' ? 15 : 25
@@ -19,9 +19,7 @@ function Bonus (y, speed, parent, player, array) {
   this.drawBonus = function () {
     this.sprite.style.left = `${this.x}px`
     this.sprite.style.bottom = `${this.y}px`
-    if (player.character === 'kimchi') {
-      this.sprite.style.height = "25px";
-    }
+
     parent.appendChild(this.sprite)
   }
 
