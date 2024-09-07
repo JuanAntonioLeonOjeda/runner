@@ -32,6 +32,7 @@ let gameSpeed = 20
 let enemies = []
 let bonusArr = []
 let flyingEnemies = false
+let doubleEnemies = false
 let score = 0
 let index = 0
 let repeatedTimer
@@ -107,10 +108,11 @@ function startGame() {
   loadBackground('road')
   const displayScore = document.createElement('span')
   displayScore.classList.add('score')
-  displayScore.innerText = `Score: ${score}`
+  displayScore.innerText = `Puntos: ${score}`
   board.appendChild(displayScore)
   
   let modeTimer = setTimeout(changeMode, 10000)
+  let doubleTimer = setTimeout(addDoubleEnemies, 20000)
   let gameTimer = setInterval(gameLoop, 50)
   let enemyTimer = setInterval(enemyCreation, createEnemyTimer)
   let bonusTimer = setInterval(bonusCreation, 5000)
@@ -133,10 +135,14 @@ function startGame() {
 
   function sumScore () {
     score += 5
-    displayScore.innerText = `Score: ${score}`
+    displayScore.innerText = `Puntos: ${score}`
   }
   function changeMode () {
     flyingEnemies = true
+  }
+
+  function addDoubleEnemies () {
+    doubleEnemies = true
   }
 
   function increaseSpeed () {
@@ -172,7 +178,7 @@ function startGame() {
           enemies.push(enemy)
           enemy.drawEnemy()
         }, 1000)
-        repeated = false;
+        repeated = false
       }
 
       const enemy = new Enemy(
@@ -185,6 +191,20 @@ function startGame() {
 
       enemies.push(enemy)
       enemy.drawEnemy()
+      if (doubleEnemies && Math.random() < 0.5) {
+        setTimeout(() => {
+          const enemy = new Enemy(
+            heights[index],
+            gameSpeed,
+            board,
+            player,
+            enemies
+          )
+
+          enemies.push(enemy)
+          enemy.drawEnemy()
+        }, 100)
+      }
 
       setTimeout(() => {
         isCreating = false
@@ -220,6 +240,7 @@ function startGame() {
   function gameOver() {
     clearTimers()
     flyingEnemies = false
+    doubleEnemies = false
     loadGameOverScreen()
     const retry = document.getElementById('retry-btn')
     retry.addEventListener('touchstart', characterSelection)
@@ -227,6 +248,7 @@ function startGame() {
 
   function clearTimers () {
     clearTimeout(modeTimer)
+    clearTimeout(doubleTimer)
     clearTimeout(repeatedTimer)
     clearInterval(gameTimer)
     clearInterval(enemyTimer)

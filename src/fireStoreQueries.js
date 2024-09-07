@@ -1,4 +1,15 @@
-import { collection, getDocs, addDoc, orderBy, limit, query, where, updateDoc, doc } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js'
+import { 
+  collection, 
+  getDocs, 
+  addDoc, 
+  getDoc, 
+  orderBy, 
+  limit, 
+  query, 
+  where, 
+  updateDoc, 
+  doc 
+} from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js'
 import { db } from "./fireStoreConfig.js"
 
 const usersCollection = collection(db, "users");
@@ -12,32 +23,72 @@ async function getTopTen() {
   return orderedScores
 }
 
-async function insertUser(data) {
+// async function insertUser(data) {
+//   try {
+//     // Create a query against the 'users' collection
+//     const q = query(usersCollection, where("name", "==", data.name));
+//     const querySnapshot = await getDocs(q);
+
+//     if (!querySnapshot.empty) {
+//       // User exists, check the score
+//       let userDoc = querySnapshot.docs[0];
+//       let userData = userDoc.data();
+
+//       if (data.score > userData.score) {
+//         // Update the score if the new score is higher
+//         await updateDoc(userDoc.ref, {
+//           score: data.score,
+//         });
+//       }
+//     } else {
+//       // User does not exist, add new user
+//       const docRef = await addDoc(collection(db, "users"), {
+//         name: data.name,
+//         score: data.score,
+//       });
+//     }
+//   } catch (e) {
+//     console.error("Error accessing the database: ", e);
+//   }
+// }
+
+async function insertUser({name, score}) {
   try {
-    // Create a query against the 'users' collection
-    const q = query(usersCollection, where("name", "==", data.name));
-    const querySnapshot = await getDocs(q);
 
-    if (!querySnapshot.empty) {
-      // User exists, check the score
-      let userDoc = querySnapshot.docs[0];
-      let userData = userDoc.data();
+    const userId = localStorage.getItem("userId")
+    if (userId) {
+      const userDocRef = doc(db, "users", userId)
+      const userDoc = await getDoc(userDocRef)
 
-      if (data.score > userData.score) {
-        // Update the score if the new score is higher
-        await updateDoc(userDoc.ref, {
-          score: data.score,
-        });
+      if (userDoc.exists()) {
+        const userData = userDoc.data()
+
+        const updatedData = {
+          name
+        }
+
+        if (score > userData.score) {
+          updatedData.score = score
+        }
+        
+        await updateDoc(userDocRef, updatedData)
+        return userId
+      } else {
+        localStorage.removeItem("userId")
       }
     } else {
-      // User does not exist, add new user
-      const docRef = await addDoc(collection(db, "users"), {
-        name: data.name,
-        score: data.score,
-      });
+      const docRef = await addDoc(usersCollection, {
+        name,
+        score
+      })
+
+      localStorage.setItem("userId", docRef.id)
+
+      return docRef.id
     }
+
   } catch (e) {
-    console.error("Error accessing the database: ", e);
+    console.error("Error accessing the database: ", e)
   }
 }
 
@@ -47,7 +98,7 @@ async function insertUser(data) {
 //     const docRef = await addDoc(collection(db, "users"), {
 //       name: data.name,
 //       score: data.score
-//     });
+//     })
 //   } catch (e) {
 //     console.error("Error adding document: ", e);
 //   }
