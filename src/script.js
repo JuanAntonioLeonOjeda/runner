@@ -47,7 +47,7 @@ const board = document.getElementById('main')
 if (board.requestFullscreen) board.requestFullscreen()
 const startButton = document.querySelector('.start-button button')
 let character
-let gameSpeed = 20
+let gameSpeed = 30
 let enemies = []
 let bonusArr = []
 let flyingEnemies = false
@@ -140,7 +140,7 @@ function startGame() {
   localStorage.hasPlayed = true
   score = 0
   let enemyCounter = 0
-  let createEnemyTimer = 3000
+  let createEnemyTimer = 2000
   const player = new Player(character, board)
   player.drawPlayer()
   loadBackground('road')
@@ -165,8 +165,6 @@ function startGame() {
   let scoreTimer = setInterval(sumScore, 100)
 
   function pauseMusic(e) {
-    e.preventDefault()
-    e.stopPropagation()
     if (audio.paused) {
       audio.play()
       speaker.classList.add("speaker")
@@ -195,6 +193,7 @@ function startGame() {
     score += 5
     displayScore.innerText = `Puntos: ${score}`
   }
+
   function changeMode () {
     flyingEnemies = true
   }
@@ -207,7 +206,7 @@ function startGame() {
     gameSpeed *= 1.5
     clearInterval(enemyTimer)
     createEnemyTimer -= 500
-    enemyTimer = setInterval(enemyCreation, createEnemyTimer);
+    enemyTimer = setInterval(enemyCreation, createEnemyTimer)
   }
 
   function enemyCreation () {
@@ -266,9 +265,8 @@ function startGame() {
 
       setTimeout(() => {
         isCreating = false
-      }, 1000)
+      }, 100)
     }
-    
   }
 
   function bonusCreation() {
@@ -291,9 +289,8 @@ function startGame() {
 
       setTimeout(() => {
         isCreating = false
-      }, 1000)
+      }, 100)
     }
-    
   }
 
   function gameOver() {
@@ -325,7 +322,7 @@ function startGame() {
     bonusArr.forEach(bonus => {
       clearInterval(bonus.timerId)
     })
-    gameSpeed = 20
+    gameSpeed = 30
   }
 
   async function loadTopScores () {
