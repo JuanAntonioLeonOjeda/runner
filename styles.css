@@ -280,6 +280,10 @@ h3 {
   height: 60px;
 }
 
+#aux {
+  margin-top: 2px;
+}
+
 .speaker {
   background-image: url('./assets/speaker.png');
   background-size: contain;

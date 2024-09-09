@@ -16,6 +16,9 @@ const sounds = {
   jump: new Audio("assets/sounds/Jump.wav")
 }
 
+sounds.jump.preload = "auto"
+sounds.jump.load()
+
 const music = {
   hottogo: "assets/music/hottogo.mp3",
   nyan: "assets/music/nyan.mp3",
@@ -121,15 +124,16 @@ let isCreating = false
 function startAudio() {
   switch (character) {
     case "tati":
-      audio = new Audio(music.hottogo);
+      audio = new Audio(music.hottogo)
+      audio.currentTime = 17
       break;
     case "kimchi":
-      audio = new Audio(music.nyan);
+      audio = new Audio(music.nyan)
       break;
     default:
-      const array = Object.values(music);
+      const array = Object.values(music)
       const idx = Math.floor(Math.random() * (6 - 2) + 2);
-      audio = new Audio(array[idx]);
+      audio = new Audio(array[idx])
   }
   audio.volume = 0.5
   audio.play()
@@ -464,17 +468,21 @@ board.addEventListener("touchstart", (e) => {
   if (!player.isDead) {
     e.preventDefault()
   }
+  if (player.jumping && character === 'tati') {
+    player.isFloating = true
+    }
+  player.isHolding = true
+
   pressTimer = setTimeout(() => {
     if (!player.jumping && !player.isDead) {
       playJumpSound()
-      player.jumping = true;
-      
+      player.jumping = true
     }
-  }, holdDuration);
+  }, holdDuration)
 });
 
 board.addEventListener("touchend", () => {
-  clearTimeout(pressTimer);
+  clearTimeout(pressTimer)
   if (player.jumping) {
     const reduceForceGradually = setInterval(() => {
       if (player.force > 0.01) {
@@ -484,5 +492,7 @@ board.addEventListener("touchend", () => {
       }
     }, 15)
   }
+  player.isHolding = false
+  player.isFloating = false
 })
 }

@@ -11,6 +11,7 @@ const characterScreen = `
       <div class="container">
         <img class="person" src="./assets/characters/tati/main.png">
       </div>
+     <div id="aux"></div> 
       <div class="text-container">
         <span class="text">Cae más lento</span>
       </div>
@@ -21,7 +22,7 @@ const characterScreen = `
         <img class="person" src="./assets/characters/juanan/main.png">
       </div>
       <div class="text-container">
-        <span class="text">Suenan temazos</span>
+        <span class="text">Suenan temazos aleatorios</span>
       </div>
     </div>
     <div class="character-select">
