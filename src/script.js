@@ -20,7 +20,7 @@ const music = {
   nyan: "assets/music/nyan.mp3",
   melancholly: "assets/music/melancholy.mp3",
   takeOnMe: "assets/music/TakeOnMe.mp3",
-  daftPunk: "assets/music/daftPunk.mp3",
+  daftPunk: "assets/music/daftpunk.mp3",
   hero: "assets/music/HoldingOutForAHero.mp3",
 }
 
@@ -127,19 +127,11 @@ function startAudio() {
       break;
     default:
       const array = Object.values(music);
-      const idx = Math.floor(Math.random() * (5 - 2) + 2);
+      const idx = Math.floor(Math.random() * (6 - 2) + 2);
       audio = new Audio(array[idx]);
   }
   audio.volume = 0.5
   audio.play()
-}
-
-function pauseMusic() {
-  if (audio.paused) {
-    audio.play()
-  } else {
-    audio.pause()
-  }
 }
 
 function startGame() {
@@ -151,10 +143,17 @@ function startGame() {
   const player = new Player(character, board)
   player.drawPlayer()
   loadBackground('road')
+
   const displayScore = document.createElement('span')
   displayScore.classList.add('score')
   displayScore.innerText = `Puntos: ${score}`
   board.appendChild(displayScore)
+
+  const speaker = document.createElement("span")
+  speaker.classList.add('speaker')
+  board.appendChild(speaker)
+
+  speaker.addEventListener('touchend', pauseMusic)
   
   let modeTimer = setTimeout(changeMode, 10000)
   let doubleTimer = setTimeout(addDoubleEnemies, 20000)
@@ -163,6 +162,19 @@ function startGame() {
   let bonusTimer = setInterval(bonusCreation, 5000)
   let speedTimer = setInterval(increaseSpeed, 30000)
   let scoreTimer = setInterval(sumScore, 100)
+
+  function pauseMusic(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    if (audio.paused) {
+      audio.play()
+      speaker.classList.add("speaker")
+      speaker.classList.remove("mute")
+    } else {
+      audio.pause()
+      speaker.classList.add("mute")
+    }
+  }
 
   function gameLoop () {
     player.jump()
@@ -269,8 +281,9 @@ function startGame() {
         gameSpeed,
         board,
         player,
-        bonusArr
-      )
+        bonusArr,
+        audio.paused
+      );
 
       bonusArr.push(bonus)
       bonus.drawBonus()
@@ -284,7 +297,10 @@ function startGame() {
 
   function gameOver() {
     audio.pause()
-    sounds.gameOver.play()
+    sounds.gameOver.volume = 0.5
+    if (!audio.paused) {
+      sounds.gameOver.play()
+    }
     clearTimers()
     flyingEnemies = false
     doubleEnemies = false
@@ -437,16 +453,21 @@ board.addEventListener("contextmenu", (e) => {
 // });
 
 function playJumpSound() {
-  const jumpSound = new Audio("assets/sounds/Jump.wav");
-
-  jumpSound.play();
-
-  jumpSound.addEventListener("ended", () => {
-    jumpSound.remove()
-  })
+  if (!audio.paused) {
+    const jumpSound = new Audio("assets/sounds/Jump.wav");
+  
+    jumpSound.play()
+  
+    jumpSound.addEventListener("ended", () => {
+      jumpSound.remove()
+    })
+  }
 }
-// Handle touch events for jumping
+
 board.addEventListener("touchstart", (e) => {
+  if (e.target === speaker) {
+    return;
+  }
   if (!player.isDead) {
     e.preventDefault()
   }

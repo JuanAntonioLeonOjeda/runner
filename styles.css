@@ -280,6 +280,27 @@ h3 {
   height: 60px;
 }
 
+.speaker {
+  background-image: url('./assets/speaker.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.mute {
+  background-image: url('./assets/mute.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  left: 10px;
+  top: 10px;
+}
+
 .name {
   background-color: lightgreen;
   border: 3px solid darkgreen;

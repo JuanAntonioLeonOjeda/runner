@@ -1,4 +1,4 @@
-function Bonus (y, speed, parent, player, array) {
+function Bonus (y, speed, parent, player, array, isMute) {
   let self = this
   this.x = window.innerWidth
   this.y = player.character === 'kimchi' ? y - 30 : y
@@ -29,7 +29,9 @@ function Bonus (y, speed, parent, player, array) {
     self.sprite.style.left = `${self.x}px`
     
     if (self.playerCollision()) {
-      self.sound.play()
+      if (!isMute) {
+        self.sound.play()
+      }
       self.removeBonus()
       player.sumBonus = true
     } else if (self.x + self.width < 0) {
