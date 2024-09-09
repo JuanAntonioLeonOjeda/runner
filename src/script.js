@@ -480,7 +480,7 @@ board.addEventListener("touchend", () => {
       if (player.force > 0.01) {
         player.force -= 1
       } else {
-        clearInterval(reduceForceGradually);
+        clearInterval(reduceForceGradually)
       }
     }, 15)
   }

@@ -356,13 +356,14 @@ h3 {
 }
 
 #help-title-text {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 #close-help {
   width: fit-content;
   height: fit-content;
   position: absolute;
+  margin-top: 0;
   right: 5%;
   color: red;
 }
