@@ -12,8 +12,17 @@ import {
 
 const sounds = {
   success: new Audio("assets/sounds/treasure.wav"),
-  gameOver: new Audio("assets/sounds/Game Over.wav")
-};
+  gameOver: new Audio("assets/sounds/gameover.mp3")
+}
+
+const music = {
+  hottogo: "assets/music/hottogo.mp3",
+  nyan: "assets/music/nyan.mp3",
+  melancholly: "assets/music/melancholy.mp3",
+  takeOnMe: "assets/music/TakeOnMe.mp3",
+  daftPunk: "assets/music/daftPunk.mp3",
+  hero: "assets/music/HoldingOutForAHero.mp3",
+}
 
 // function goFullScreen() {
 //     if (document.documentElement.requestFullscreen) {
@@ -45,6 +54,7 @@ let doubleEnemies = false
 let score = 0
 let index = 0
 let repeatedTimer
+let audio
 
 startButton.addEventListener('touchstart', characterSelection)
 
@@ -107,7 +117,33 @@ function loadBackground(source) {
 
 let isCreating = false
 
+function startAudio() {
+  switch (character) {
+    case "tati":
+      audio = new Audio(music.hottogo);
+      break;
+    case "kimchi":
+      audio = new Audio(music.nyan);
+      break;
+    default:
+      const array = Object.values(music);
+      const idx = Math.floor(Math.random() * (5 - 2) + 2);
+      audio = new Audio(array[idx]);
+  }
+  audio.volume = 0.5
+  audio.play()
+}
+
+function pauseMusic() {
+  if (audio.paused) {
+    audio.play()
+  } else {
+    audio.pause()
+  }
+}
+
 function startGame() {
+  startAudio()
   localStorage.hasPlayed = true
   score = 0
   let enemyCounter = 0
@@ -247,6 +283,7 @@ function startGame() {
   }
 
   function gameOver() {
+    audio.pause()
     sounds.gameOver.play()
     clearTimers()
     flyingEnemies = false

@@ -8,7 +8,7 @@ function Bonus (y, speed, parent, player, array) {
   this.sprite = document.createElement('div')
   this.sprite.classList.add('bonus')
   this.sprite.style.backgroundSize = 'contain'
-  this.sound = new Audio('assets/sounds/1up.wav')
+  this.sound = new Audio('assets/sounds/ring.wav')
 
   this.checkCharacter = function () {
     if (player.character === 'tati') return 'chocolate'
