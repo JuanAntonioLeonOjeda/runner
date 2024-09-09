@@ -12,7 +12,8 @@ import {
 
 const sounds = {
   success: new Audio("assets/sounds/treasure.wav"),
-  gameOver: new Audio("assets/sounds/gameover.mp3")
+  gameOver: new Audio("assets/sounds/gameover.mp3"),
+  jump: new Audio("assets/sounds/Jump.wav")
 }
 
 const music = {
@@ -296,11 +297,11 @@ function startGame() {
   }
 
   function gameOver() {
-    audio.pause()
     sounds.gameOver.volume = 0.5
     if (!audio.paused) {
       sounds.gameOver.play()
     }
+    audio.pause()
     clearTimers()
     flyingEnemies = false
     doubleEnemies = false
@@ -454,13 +455,8 @@ board.addEventListener("contextmenu", (e) => {
 
 function playJumpSound() {
   if (!audio.paused) {
-    const jumpSound = new Audio("assets/sounds/Jump.wav");
-  
-    jumpSound.play()
-  
-    jumpSound.addEventListener("ended", () => {
-      jumpSound.remove()
-    })
+    sounds.jump.currentTime = 0
+    sounds.jump.play()
   }
 }
 
