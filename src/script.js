@@ -350,7 +350,7 @@ function startGame() {
         container.innerText = `${player.name}: ${player.score}`
         list.appendChild(container)
       })
-      sounds.success.play()
+      if (localStorage.mute === 'false') sounds.success.play()
     } catch (error) {
       console.error(error)
     }
@@ -369,7 +369,7 @@ function startGame() {
     await insertUser({ name: userName, score })
     const players = await getAllPlayers()
     const result = players.findIndex(player => {
-      return player.name === value
+      return player.id === localStorage.userId
     })
     main.removeChild(loading)
     input.value = ''

@@ -110,9 +110,12 @@ async function getAllPlayers() {
     const q = query(users, orderBy('score', 'desc'))
 
     const querySnapshot = await getDocs(q);
-    const result = querySnapshot.docs.map(doc => doc.data());
+    const result = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
 
-    return result;
+    return result
   } catch (error) {
     console.error(error)
   }
