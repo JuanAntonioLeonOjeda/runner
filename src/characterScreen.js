@@ -13,7 +13,7 @@ const characterScreen = `
       </div>
      <div id="aux"></div> 
       <div class="text-container">
-        <span class="text">Cae más lento</span>
+        <span class="text">Cae más lento cuando mantienes pulsado</span>
       </div>
     </div>
     <div class="character-select">
@@ -22,7 +22,7 @@ const characterScreen = `
         <img class="person" src="./assets/characters/juanan/main.png">
       </div>
       <div class="text-container">
-        <span class="text">Suenan temazos aleatorios</span>
+        <span class="text">Cambia de canción cada 30 seg</span>
       </div>
     </div>
     <div class="character-select">

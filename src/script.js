@@ -60,6 +60,8 @@ let index = 0
 let repeatedTimer
 let audio
 
+localStorage.mute = 'false'
+
 startButton.addEventListener('touchstart', characterSelection)
 
 function removeChildren(element) {
@@ -140,7 +142,12 @@ function startAudio() {
 }
 
 function startGame() {
-  startAudio()
+  if (!sounds.gameOver.paused) {
+    sounds.gameOver.pause()
+    sounds.gameOver.currentTime = 0
+  }
+  if (localStorage.mute === 'false') startAudio()
+
   localStorage.hasPlayed = true
   score = 0
   let enemyCounter = 0
@@ -155,7 +162,8 @@ function startGame() {
   board.appendChild(displayScore)
 
   const speaker = document.createElement("span")
-  speaker.classList.add('speaker')
+
+  speaker.classList.add(localStorage.mute === 'false' ?'speaker' : 'mute')
   board.appendChild(speaker)
 
   speaker.addEventListener('touchend', pauseMusic)
@@ -168,14 +176,16 @@ function startGame() {
   let speedTimer = setInterval(increaseSpeed, 30000)
   let scoreTimer = setInterval(sumScore, 100)
 
-  function pauseMusic(e) {
-    if (audio.paused) {
+  function pauseMusic() {
+    if (localStorage.mute === 'true') {
       audio.play()
       speaker.classList.add("speaker")
       speaker.classList.remove("mute")
+      localStorage.mute = 'false'
     } else {
       audio.pause()
       speaker.classList.add("mute")
+      localStorage.mute = 'true'
     }
   }
 
