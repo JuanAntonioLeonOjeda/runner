@@ -228,16 +228,18 @@ h3 {
 }
 
 #retry-btn {
-  width: 20vw;
+  width: 15vw;
   height: 10vh;
   font-family: 'Press Start 2P';
   font-size: 16px;
   margin-top: 5vh;
-  min-width: 200px;
-  max-width: 250px;
+  min-width: 175px;
+  max-width: 190px;
   max-height: 50px;
   pointer-events: auto;
   background-color: lightgreen;
+  border-radius: 5%;
+  border: 2px solid darkgreen;
 }
 
 #upload-btn {
