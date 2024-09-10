@@ -28,6 +28,9 @@ const music = {
   hero: "assets/music/HoldingOutForAHero.mp3",
 }
 
+const array = Object.values(music)
+
+
 // function goFullScreen() {
 //     if (document.documentElement.requestFullscreen) {
 //         document.documentElement.requestFullscreen();
@@ -59,6 +62,8 @@ let score = 0
 let index = 0
 let repeatedTimer
 let audio
+let audioInterval
+let prevIdx
 
 localStorage.mute = 'false'
 
@@ -123,6 +128,18 @@ function loadBackground(source) {
 
 let isCreating = false
 
+function defineStartTime(audio, idx) {
+  if (idx === 2) {
+    audio.currentTime = 20
+  } else if (idx === 3) {
+    audio.currentTime = 17
+  } else if (idx === 4) {
+    audio.currentTime = 39
+  } else {
+    audio.currentTime = 55
+  }
+}
+
 function startAudio() {
   switch (character) {
     case "tati":
@@ -131,11 +148,16 @@ function startAudio() {
       break;
     case "kimchi":
       audio = new Audio(music.nyan)
-      break;
+      break
     default:
-      const array = Object.values(music)
-      const idx = Math.floor(Math.random() * (6 - 2) + 2);
+      let idx = Math.floor(Math.random() * (6 - 2) + 2)
+      while (idx === prevIdx) {
+        idx = Math.floor(Math.random() * (6 - 2) + 2)
+      }
+      prevIdx = idx
       audio = new Audio(array[idx])
+
+      defineStartTime(audio, idx)
   }
   audio.volume = 0.5
   audio.play()
@@ -147,6 +169,19 @@ function startGame() {
     sounds.gameOver.currentTime = 0
   }
   if (localStorage.mute === 'false') startAudio()
+
+  if (character === "juanan") {
+    if (audioInterval) {
+      clearInterval(audioInterval)
+    }
+
+    audioInterval = setInterval(() => {
+      if (localStorage.mute === "false") {
+        audio.pause()
+        startAudio()
+      }
+    }, 30000)
+  }
 
   localStorage.hasPlayed = true
   score = 0
@@ -330,6 +365,7 @@ function startGame() {
     clearInterval(speedTimer)
     clearInterval(scoreTimer)
     clearInterval(bonusTimer)
+    clearInterval(audioInterval)
     enemies.forEach(enemy => {
       clearInterval(enemy.timerId)
     })
