@@ -265,8 +265,8 @@ function startGame() {
   }
 
   function enemyCreation () {
-    // if (!isCreating) {
-      // isCreating = true
+    if (!isCreating) {
+      isCreating = true
       let repeated = false
       const heights = [50, 200]
 
@@ -323,7 +323,11 @@ function startGame() {
           if (!player.isDead) bonusCreation()
         }, 800)
       }
-    // }
+
+      setTimeout(() => {
+        isCreating = false
+      }, 800)
+    }
   }
 
   function bonusCreation() {
