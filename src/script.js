@@ -141,6 +141,11 @@ function defineStartTime(audio, idx) {
 }
 
 function startAudio() {
+   if (audio) {
+     audio.pause();
+     audio.currentTime = 0
+   }
+
   switch (character) {
     case "tati":
       audio = new Audio(music.hottogo)
@@ -160,7 +165,7 @@ function startAudio() {
       defineStartTime(audio, idx)
   }
   audio.volume = 0.5
-  audio.play()
+  if (localStorage.mute === "false") audio.play()
 }
 
 function startGame() {
@@ -168,7 +173,8 @@ function startGame() {
     sounds.gameOver.pause()
     sounds.gameOver.currentTime = 0
   }
-  if (localStorage.mute === 'false') startAudio()
+  // if (localStorage.mute === "false") startAudio()
+  startAudio()
 
   if (character === "juanan") {
     if (audioInterval) {
