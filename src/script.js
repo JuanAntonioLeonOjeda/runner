@@ -207,7 +207,7 @@ function startGame() {
   let doubleTimer = setTimeout(addDoubleEnemies, 20000)
   let gameTimer = setInterval(gameLoop, 50)
   let enemyTimer = setInterval(enemyCreation, createEnemyTimer)
-  let bonusTimer = setInterval(bonusCreation, 5000)
+  // let bonusTimer = setInterval(bonusCreation, 5000)
   let speedTimer = setInterval(increaseSpeed, 30000)
   let scoreTimer = setInterval(sumScore, 100)
 
@@ -259,8 +259,8 @@ function startGame() {
   }
 
   function enemyCreation () {
-    if (!isCreating) {
-      isCreating = true
+    // if (!isCreating) {
+      // isCreating = true
       let repeated = false
       const heights = [50, 200]
 
@@ -312,15 +312,17 @@ function startGame() {
         }, 100)
       }
 
-      setTimeout(() => {
-        isCreating = false
-      }, 100)
-    }
+      if (Math.random() > 0.7) {
+        setTimeout(() => {
+          if (!player.isDead) bonusCreation()
+        }, 800)
+      }
+    // }
   }
 
   function bonusCreation() {
-    if (!isCreating) {
-      isCreating = true
+    // if (!isCreating) {
+      // isCreating = true
       const heights = [100, 200]
       let index = Math.floor(Math.random() * heights.length)
 
@@ -336,10 +338,10 @@ function startGame() {
       bonusArr.push(bonus)
       bonus.drawBonus()
 
-      setTimeout(() => {
-        isCreating = false
-      }, 100)
-    }
+      // setTimeout(() => {
+      //   isCreating = false
+      // }, 100)
+    // }
   }
 
   function gameOver() {
@@ -364,7 +366,7 @@ function startGame() {
     clearInterval(enemyTimer)
     clearInterval(speedTimer)
     clearInterval(scoreTimer)
-    clearInterval(bonusTimer)
+    // clearInterval(bonusTimer)
     clearInterval(audioInterval)
     enemies.forEach(enemy => {
       clearInterval(enemy.timerId)
