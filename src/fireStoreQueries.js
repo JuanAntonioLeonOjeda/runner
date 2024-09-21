@@ -92,7 +92,6 @@ async function insertUser({name, score}) {
   }
 }
 
-
 // async function insertUser(data) {
 //   try {
 //     const docRef = await addDoc(collection(db, "users"), {

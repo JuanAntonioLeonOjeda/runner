@@ -5,7 +5,14 @@ function Player(character, parent) {
   this.jumping = false
   this.force = character === 'kimchi' ? 150 : 100
   this.fallSpeed = 30
-  this.height = character === 'kimchi' ? 50 : 100
+  this.characterHeight = function() {
+    switch(character) {
+      case ('kimchi'): return 45
+      case ('tati'): return 70
+      default: return 80
+    }
+  }
+  this.height = this.characterHeight()
   this.width = character === 'kimchi' ? 50 : 90
   this.isDead = false
   this.sumBonus = false
@@ -28,6 +35,7 @@ function Player(character, parent) {
   this.numberOfSprites = function() {
     return character === 'kimchi' ? 6 : 4
   }
+
 
   this.runAnimation = function () {
     if (self.iterations === 2) {

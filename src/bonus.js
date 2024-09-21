@@ -1,7 +1,15 @@
 function Bonus (y, speed, parent, player, array, isMute) {
   let self = this
   this.x = window.innerWidth
-  this.y = player.character === 'kimchi' ? y - 30 : y
+  this.setHeight = function() {
+    switch (player.character) {
+      case 'kimchi':
+        return y > 100 ? y : y - 30
+      default:
+        return y
+    }
+  }
+  this.y = this.setHeight()
   this.speed = speed
   this.width = 25
   this.height = player.character === 'kimchi' ? 15 : 25
@@ -9,17 +17,17 @@ function Bonus (y, speed, parent, player, array, isMute) {
   this.sprite.classList.add('bonus')
   this.sprite.style.backgroundSize = 'contain'
   this.sound = new Audio('assets/sounds/ring.wav')
-
+  
   this.checkCharacter = function () {
     if (player.character === 'tati') return 'chocolate'
     if (player.character === 'juanan') return 'coffee'
     return 'fish'
-  }
-  this.sprite.style.backgroundImage = `url(./assets/bonus/${this.checkCharacter()}.png`
-
-  this.drawBonus = function () {
-    this.sprite.style.left = `${this.x}px`
-    this.sprite.style.bottom = `${this.y}px`
+    }
+    this.sprite.style.backgroundImage = `url(./assets/bonus/${this.checkCharacter()}.png`
+    
+    this.drawBonus = function () {
+      this.sprite.style.left = `${this.x}px`
+      this.sprite.style.bottom = `${this.y}px`
 
     parent.appendChild(this.sprite)
   }

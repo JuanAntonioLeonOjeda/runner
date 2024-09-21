@@ -60,7 +60,6 @@ let flyingEnemies = false
 let doubleEnemies = false
 let score = 0
 let index = 0
-let repeatedTimer
 let audio
 let audioInterval
 let prevIdx
@@ -190,9 +189,14 @@ function startGame() {
   }
 
   localStorage.hasPlayed = true
+  let gameOverFlag = false
   score = 0
   let enemyCounter = 0
   let createEnemyTimer = 2000
+  let pauseEnemyGeneration = false
+  let clearScreenInterval
+  let repeatedTimer
+
   const player = new Player(character, board)
   player.drawPlayer()
   loadBackground('road')
@@ -257,76 +261,111 @@ function startGame() {
     doubleEnemies = true
   }
 
+  function resumeEnemyGeneration() {
+    pauseEnemyGeneration = false
+
+    if (createEnemyTimer > 1000) {
+      createEnemyTimer -= 500;
+    }
+    clearInterval(enemyTimer);
+    enemyTimer = setInterval(enemyCreation, createEnemyTimer);
+  }
+
   function increaseSpeed () {
     gameSpeed *= 1.5
-    clearInterval(enemyTimer)
-    createEnemyTimer -= 500
-    enemyTimer = setInterval(enemyCreation, createEnemyTimer)
+    
+    if (createEnemyTimer > 1000) {
+      clearInterval(enemyTimer)
+      pauseEnemyGeneration = true
+      const clean = setTimeout(() => {
+        enemies.splice(0, enemies.length)
+      }, 3000)
+      clearScreenInterval = setInterval(() => {
+        console.log(enemies)
+        console.log(enemies.length)
+        if (enemies.length === 0) {
+          clearTimeout(clean)
+          resumeEnemyGeneration()
+          clearInterval(clearScreenInterval)
+        }
+      }, 100)
+      enemyTimer = setInterval(enemyCreation, createEnemyTimer)
+    }
   }
 
   function enemyCreation () {
-    if (!isCreating) {
-      isCreating = true
-      let repeated = false
-      const heights = [50, 200]
+    if (!isCreating && !pauseEnemyGeneration && !gameOverFlag) {
+      isCreating = true;
+      let repeated = false;
+      const heights = [50, 200];
+
+      const enemyHeight = heights[Math.floor(Math.random() * heights.length)];
 
       if (flyingEnemies) {
-        const aux = Math.floor(Math.random() * heights.length)
-        if (aux === index) {
-          repeated = true
+        if (enemyHeight === heights[index]) {
+          repeated = true;
         }
-        index = aux
+        index = heights.indexOf(enemyHeight);
       }
 
-      if (repeated) {
-        repeatedTimer = setTimeout(() => {
-          const enemy = new Enemy(
-            heights[index === 0 ? 1 : 0],
-            gameSpeed,
-            board,
-            player,
-            enemies
-          )
-          enemies.push(enemy)
-          enemy.drawEnemy()
-        }, 1000)
-        repeated = false
-      }
+      const currentSpeed = gameSpeed;
 
       const enemy = new Enemy(
-        heights[index],
-        gameSpeed,
+        enemyHeight,
+        currentSpeed,
         board,
         player,
         enemies
-      )
+      );
+      enemies.push(enemy);
+      enemy.drawEnemy();
 
-      enemies.push(enemy)
-      enemy.drawEnemy()
+      if (repeated) {
+        const secondEnemyHeight = heights.find(
+          (height) => height !== enemyHeight
+        );
+        repeatedTimer = setTimeout(() => {
+          if (!gameOverFlag) {
+            const enemy = new Enemy(
+              secondEnemyHeight,
+              currentSpeed,
+              board,
+              player,
+              enemies
+            );
+            enemies.push(enemy);
+            enemy.drawEnemy();
+          }
+        }, 1000);
+        repeated = false;
+      }
+
       if (doubleEnemies && Math.random() < 0.5) {
         setTimeout(() => {
-          const enemy = new Enemy(
-            heights[index],
-            gameSpeed,
-            board,
-            player,
-            enemies
-          )
-
-          enemies.push(enemy)
-          enemy.drawEnemy()
+          if (!gameOverFlag) {
+            const enemy = new Enemy(
+              enemyHeight,
+              currentSpeed,
+              board,
+              player,
+              enemies
+            );
+  
+            enemies.push(enemy)
+            enemy.drawEnemy()
+          }
         }, 100)
       }
 
       if (Math.random() > 0.7) {
         setTimeout(() => {
-          if (!player.isDead) bonusCreation()
-        }, 800)
+          if (!player.isDead) bonusCreation();
+        }, 800);
       }
 
       setTimeout(() => {
-        isCreating = false
-      }, 800)
+        isCreating = false;
+      }, 800);
     }
   }
 
@@ -355,6 +394,7 @@ function startGame() {
   }
 
   function gameOver() {
+    gameOverFlag = true
     sounds.gameOver.volume = 0.5
     if (!audio.paused) {
       sounds.gameOver.play()
@@ -376,14 +416,16 @@ function startGame() {
     clearInterval(enemyTimer)
     clearInterval(speedTimer)
     clearInterval(scoreTimer)
-    // clearInterval(bonusTimer)
     clearInterval(audioInterval)
+    clearInterval(clearScreenInterval)
+
     enemies.forEach(enemy => {
       clearInterval(enemy.timerId)
     })
     bonusArr.forEach(bonus => {
       clearInterval(bonus.timerId)
     })
+    enemies.splice(0, enemies.length)
     gameSpeed = 30
   }
 

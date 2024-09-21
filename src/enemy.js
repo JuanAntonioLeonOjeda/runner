@@ -1,4 +1,12 @@
 function Enemy (y, speed, parent, player, array) {
+  this.id = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0;
+        const v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    )
   let self = this
   this.x = window.innerWidth
   this.y = y
@@ -56,7 +64,7 @@ function Enemy (y, speed, parent, player, array) {
       player.isDead = true
     }
 
-    if (self.x + self.width + 25 < 0) {
+    if (self.x + self.width + 25 <= 0) {
       self.removeEnemy()
     }
   }
@@ -69,9 +77,14 @@ function Enemy (y, speed, parent, player, array) {
   }
 
   this.removeEnemy = function () {
+    console.log('remove enemy')
     parent.removeChild(this.sprite)
     clearInterval(this.timerId)
-    array.splice(0,1)
+    const index = array.findIndex(enemy => enemy.id === this.id)
+    if (index !== -1) {
+      array.splice(index, 1)
+    }
+    console.log(array)
   }
 
   this.timerId = setInterval(this.move, 50)
