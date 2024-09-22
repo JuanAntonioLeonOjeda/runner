@@ -33,20 +33,20 @@ const array = Object.values(music)
 
 // function goFullScreen() {
 //     if (document.documentElement.requestFullscreen) {
-//         document.documentElement.requestFullscreen();
+//         document.documentElement.requestFullscreen()
 //     } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
-//         document.documentElement.mozRequestFullScreen();
+//         document.documentElement.mozRequestFullScreen()
 //     } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-//         document.documentElement.webkitRequestFullscreen();
+//         document.documentElement.webkitRequestFullscreen()
 //     } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
-//         document.documentElement.msRequestFullscreen();
+//         document.documentElement.msRequestFullscreen()
 //     }
 // }
 
 // window.addEventListener("load", function () {
 //   setTimeout(function () {
-//     window.scrollTo(0, document.body.scrollHeight);{}
-//   }, 0);
+//     window.scrollTo(0, document.body.scrollHeight){}
+//   }, 0)
 // })
 
 const board = document.getElementById('main')
@@ -141,7 +141,7 @@ function defineStartTime(audio, idx) {
 
 function startAudio() {
    if (audio) {
-     audio.pause();
+     audio.pause()
      audio.currentTime = 0
    }
 
@@ -149,7 +149,7 @@ function startAudio() {
     case "tati":
       audio = new Audio(music.hottogo)
       audio.currentTime = 17
-      break;
+      break
     case "kimchi":
       audio = new Audio(music.nyan)
       break
@@ -265,10 +265,10 @@ function startGame() {
     pauseEnemyGeneration = false
 
     if (createEnemyTimer > 1000) {
-      createEnemyTimer -= 500;
+      createEnemyTimer -= 500
     }
-    clearInterval(enemyTimer);
-    enemyTimer = setInterval(enemyCreation, createEnemyTimer);
+    clearInterval(enemyTimer)
+    enemyTimer = setInterval(enemyCreation, createEnemyTimer)
   }
 
   function increaseSpeed () {
@@ -281,8 +281,6 @@ function startGame() {
         enemies.splice(0, enemies.length)
       }, 3000)
       clearScreenInterval = setInterval(() => {
-        console.log(enemies)
-        console.log(enemies.length)
         if (enemies.length === 0) {
           clearTimeout(clean)
           resumeEnemyGeneration()
@@ -295,20 +293,20 @@ function startGame() {
 
   function enemyCreation () {
     if (!isCreating && !pauseEnemyGeneration && !gameOverFlag) {
-      isCreating = true;
-      let repeated = false;
-      const heights = [50, 200];
+      isCreating = true
+      let repeated = false
+      const heights = [50, 200]
 
-      const enemyHeight = heights[Math.floor(Math.random() * heights.length)];
+      const enemyHeight = heights[Math.floor(Math.random() * heights.length)]
 
       if (flyingEnemies) {
         if (enemyHeight === heights[index]) {
-          repeated = true;
+          repeated = true
         }
-        index = heights.indexOf(enemyHeight);
+        index = heights.indexOf(enemyHeight)
       }
 
-      const currentSpeed = gameSpeed;
+      const currentSpeed = gameSpeed
 
       const enemy = new Enemy(
         enemyHeight,
@@ -316,14 +314,14 @@ function startGame() {
         board,
         player,
         enemies
-      );
-      enemies.push(enemy);
-      enemy.drawEnemy();
+      )
+      enemies.push(enemy)
+      enemy.drawEnemy()
 
-      if (repeated) {
+      if (repeated && !isCreating) {
         const secondEnemyHeight = heights.find(
           (height) => height !== enemyHeight
-        );
+        )
         repeatedTimer = setTimeout(() => {
           if (!gameOverFlag) {
             const enemy = new Enemy(
@@ -332,12 +330,12 @@ function startGame() {
               board,
               player,
               enemies
-            );
-            enemies.push(enemy);
-            enemy.drawEnemy();
+            )
+            enemies.push(enemy)
+            enemy.drawEnemy()
           }
-        }, 1000);
-        repeated = false;
+        }, 1000)
+        repeated = false
       }
 
       if (doubleEnemies && Math.random() < 0.5) {
@@ -349,7 +347,7 @@ function startGame() {
               board,
               player,
               enemies
-            );
+            )
   
             enemies.push(enemy)
             enemy.drawEnemy()
@@ -359,38 +357,31 @@ function startGame() {
 
       if (Math.random() > 0.7) {
         setTimeout(() => {
-          if (!player.isDead) bonusCreation();
-        }, 800);
+          if (!player.isDead) bonusCreation()
+        }, 800)
       }
 
       setTimeout(() => {
-        isCreating = false;
-      }, 800);
+        isCreating = false
+      }, 800)
     }
   }
 
   function bonusCreation() {
-    // if (!isCreating) {
-      // isCreating = true
-      const heights = [100, 200]
-      let index = Math.floor(Math.random() * heights.length)
+    const heights = [100, 200]
+    let index = Math.floor(Math.random() * heights.length)
 
-      const bonus = new Bonus(
-        heights[index],
-        gameSpeed,
-        board,
-        player,
-        bonusArr,
-        audio.paused
-      );
+    const bonus = new Bonus(
+      heights[index],
+      gameSpeed,
+      board,
+      player,
+      bonusArr,
+      audio.paused
+    )
 
-      bonusArr.push(bonus)
-      bonus.drawBonus()
-
-      // setTimeout(() => {
-      //   isCreating = false
-      // }, 100)
-    // }
+    bonusArr.push(bonus)
+    bonus.drawBonus()
   }
 
   function gameOver() {
@@ -475,7 +466,7 @@ function startGame() {
   function loadGameOverScreen () {
     removeChildren(board)
     board.innerHTML = gameOverScreen
-     const input = document.querySelector("#name-input");
+     const input = document.querySelector("#name-input")
      if (!input.value) {
       input.value = localStorage.getItem('user')
      }
@@ -511,48 +502,48 @@ function startGame() {
 //   })
 //   board.addEventListener("touchstart", (e) => {
 //     if (!player.jumping) {
-//       player.jumping = true;
+//       player.jumping = true
 //     }
 //   })
-let pressTimer;
-const holdDuration = 1; // Duration in milliseconds to detect a held press
+let pressTimer
+const holdDuration = 1 // Duration in milliseconds to detect a held press
 
 // Prevent the context menu from appearing on long press
 board.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
-});
+  e.preventDefault()
+})
 
 // Handle mouse events for jumping
 // board.addEventListener("mousedown", (e) => {
-//   e.preventDefault();
+//   e.preventDefault()
 //   pressTimer = setTimeout(() => {
 //     if (!player.jumping) {
-//       player.jumping = true;
+//       player.jumping = true
 //     }
-//   }, holdDuration);
-// });
+//   }, holdDuration)
+// })
 
 // board.addEventListener("mouseup", () => {
-//   e.preventDefault();
+//   e.preventDefault()
 //   pressTimer = setTimeout(() => {
 //     if (!player.jumping) {
-//       player.jumping = true;
+//       player.jumping = true
 //     }
-//   }, holdDuration);
-// });
+//   }, holdDuration)
+// })
 
 // board.addEventListener("mouseleave", () => {
-//   clearTimeout(pressTimer);
+//   clearTimeout(pressTimer)
 //   if (player.jumping) {
 //     const reduceForceGradually = setInterval(() => {
 //       if (player.force > 0.1) {
-//         player.force -= 100;
+//         player.force -= 100
 //       } else {
-//         clearInterval(reduceForceGradually);
+//         clearInterval(reduceForceGradually)
 //       }
-//     }, 10);
+//     }, 10)
 //   }
-// });
+// })
 
 function playJumpSound() {
   if (!audio.paused) {
@@ -563,7 +554,7 @@ function playJumpSound() {
 
 board.addEventListener("touchstart", (e) => {
   if (e.target === speaker) {
-    return;
+    return
   }
   if (!player.isDead) {
     e.preventDefault()
@@ -579,7 +570,7 @@ board.addEventListener("touchstart", (e) => {
       player.jumping = true
     }
   }, holdDuration)
-});
+})
 
 board.addEventListener("touchend", () => {
   clearTimeout(pressTimer)

@@ -77,14 +77,12 @@ function Enemy (y, speed, parent, player, array) {
   }
 
   this.removeEnemy = function () {
-    console.log('remove enemy')
     parent.removeChild(this.sprite)
     clearInterval(this.timerId)
     const index = array.findIndex(enemy => enemy.id === this.id)
     if (index !== -1) {
       array.splice(index, 1)
     }
-    console.log(array)
   }
 
   this.timerId = setInterval(this.move, 50)
