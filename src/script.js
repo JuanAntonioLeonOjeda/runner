@@ -16,6 +16,7 @@ const sounds = {
   jump: new Audio("assets/sounds/Jump.wav")
 }
 
+sounds.jump.volume = 1;
 sounds.jump.preload = "auto"
 sounds.jump.load()
 
