@@ -32,7 +32,6 @@ function Enemy (y, speed, parent, player, array) {
 
   this.sprite.style.backgroundImage = `url(./assets/enemies/${this.checkHeight()}`
   if (this.checkHeight() === 'baby1.png') {
-    // this.sprite.style.rotate = 'y 180deg'
     this.sprite.style.width = '70px'
     this.sprite.style.height = '70px'
   }
@@ -57,24 +56,36 @@ function Enemy (y, speed, parent, player, array) {
         self.babyFrame = 1
       }
     }
-    self.x -= self.speed
-    self.sprite.style.left = `${self.x}px`
-    
-    if (self.playerCollision()) {
-      player.isDead = true
+    const previousX = self.x;
+
+    // Move the enemy
+    self.x -= self.speed;
+    self.sprite.style.left = `${self.x}px`;
+
+    // Check for player collision using the new and previous positions
+    if (self.playerCollision(previousX)) {
+      player.isDead = true;
     }
 
+    // If enemy is out of screen, remove it
     if (self.x + self.width + 25 <= 0) {
-      self.removeEnemy()
+      self.removeEnemy();
     }
   }
 
-  this.playerCollision = function () {
-    return self.x < player.x + player.width - 10 &&
-           self.x + self.width > player.x + 10 &&
-           self.y < player.y + player.height + 10 &&
-           self.y + self.height > player.y - 10
-  }
+  this.playerCollision = function (previousX) {
+    // Get the furthest left and right positions of the enemy during its movement
+    const minX = Math.min(self.x, previousX);
+    const maxX = Math.max(self.x + self.width, previousX + self.width);
+
+    // Check if this bounding box intersects with the player's bounding box
+    return (
+      minX < player.x + player.width &&
+      maxX > player.x &&
+      self.y < player.y + player.height &&
+      self.y + self.height > player.y
+    );
+  };
 
   this.removeEnemy = function () {
     parent.removeChild(this.sprite)
