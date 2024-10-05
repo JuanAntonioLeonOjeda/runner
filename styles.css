@@ -7,7 +7,7 @@ html, body {
   font-size: calc(16px + 1vw);
   line-height: calc(1.1em + 0.5vw);
   overflow: scroll;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   margin: auto;
   }

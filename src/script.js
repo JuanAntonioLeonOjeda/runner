@@ -595,7 +595,7 @@ function playJumpSound() {
 // })
 // }
 let pressTimer;
-const holdDuration = 50; // Set a reasonable time to detect a long press (e.g., 500ms)
+const holdDuration = 50
 
 let isLongPress = false;
 
@@ -612,12 +612,12 @@ board.addEventListener('touchstart', (e) => {
 
   if (player.jumping && character === 'tati') {
     player.isFloating = true
-  }
+    }
   player.isHolding = true
 
   // Long press detection (start the timer)
   pressTimer = setTimeout(() => {
-    isLongPress = true;
+    isLongPress = true
     // Long press behavior
     if (!player.jumping && !player.isDead) {
       playJumpSound();
