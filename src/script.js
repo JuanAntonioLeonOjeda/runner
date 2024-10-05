@@ -617,7 +617,7 @@ board.addEventListener('touchstart', (e) => {
       player.jumping = true;
     }
   }, holdDuration);
-});
+}, { passive: false });
 
 // Prevent long-press context menu on iPhone by listening to touchmove
 board.addEventListener('touchmove', (e) => {
