@@ -35,7 +35,10 @@ h3 {
   background-repeat:no-repeat;
   position: relative;
   display: none;
-  touch-action: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .rotate {

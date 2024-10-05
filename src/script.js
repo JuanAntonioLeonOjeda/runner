@@ -31,6 +31,10 @@ const music = {
 
 const array = Object.values(music)
 
+const isIphone = /iPhone/.test(navigator.userAgent);
+
+console.log(isIphone)
+
 
 // function goFullScreen() {
 //     if (document.documentElement.requestFullscreen) {
@@ -593,13 +597,14 @@ function playJumpSound() {
 // }
 let isLongPress = false
 
+// Handle touchstart with additional logic for iPhone Chrome
 board.addEventListener('touchstart', (e) => {
   if (e.target === speaker) {
     return;
   }
-  
-  // Prevent default behavior (context menu) on iPhone
-  if (!player.isDead) {
+
+  // Prevent default on iPhone Chrome to avoid context menu
+  if (!player.isDead && isIphone) {
     e.preventDefault();
   }
 
@@ -609,7 +614,7 @@ board.addEventListener('touchstart', (e) => {
   }
   player.isHolding = true;
 
-  // Detect long press for iPhone/Safari
+  // Long press detection
   pressTimer = setTimeout(() => {
     isLongPress = true;
     if (!player.jumping && !player.isDead) {
@@ -617,19 +622,19 @@ board.addEventListener('touchstart', (e) => {
       player.jumping = true;
     }
   }, holdDuration);
+}, { passive: false }); 
+
+// Prevent context menu on long touch for iPhone Chrome
+board.addEventListener('touchmove', (e) => {
+  if (isIphone) {
+    e.preventDefault(); // On movement, prevent the context menu from appearing
+  }
 }, { passive: false });
 
-// Prevent long-press context menu on iPhone by listening to touchmove
-board.addEventListener('touchmove', (e) => {
-  if (isLongPress) {
-    e.preventDefault(); // Cancel the context menu if long press is detected
-  }
-});
-
-// Handle touchend event
-board.addEventListener('touchend', () => {
+// Handle touchend with passive set to false
+board.addEventListener('touchend', (e) => {
   clearTimeout(pressTimer);
-  isLongPress = false; // Reset the long press flag
+  isLongPress = false;
 
   if (player.jumping) {
     const reduceForceGradually = setInterval(() => {
@@ -644,12 +649,12 @@ board.addEventListener('touchend', () => {
   // Reset player state
   player.isHolding = false;
   player.isFloating = false;
-  });
+}, { passive: false });
 
-  // Add a contextmenu event listener to prevent it on right-click (desktop browsers)
-  board.addEventListener('contextmenu', (e) => {
-    if (!player.isDead) {
-      e.preventDefault();
-    }
-  })
+// Add a contextmenu event listener to prevent it on right-click (desktop browsers)
+board.addEventListener('contextmenu', (e) => {
+  if (!player.isDead) {
+    e.preventDefault();
+  }
+})
 }
