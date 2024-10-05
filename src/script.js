@@ -595,7 +595,7 @@ function playJumpSound() {
 // })
 // }
 let pressTimer;
-const holdDuration = 500; // Set a reasonable time to detect a long press (e.g., 500ms)
+const holdDuration = 50; // Set a reasonable time to detect a long press (e.g., 500ms)
 
 let isLongPress = false;
 
