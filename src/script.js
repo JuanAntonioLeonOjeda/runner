@@ -509,45 +509,45 @@ function startGame() {
 let pressTimer
 const holdDuration = 1 // Duration in milliseconds to detect a held press
 
-// Prevent the context menu from appearing on long press
-board.addEventListener("contextmenu", (e) => {
-    if (!player.isDead) {
-      e.preventDefault();
-    }
-  // e.preventDefault()
-})
-
-// Handle mouse events for jumping
-// board.addEventListener("mousedown", (e) => {
-//   e.preventDefault()
-//   pressTimer = setTimeout(() => {
-//     if (!player.jumping) {
-//       player.jumping = true
+// // Prevent the context menu from appearing on long press
+// board.addEventListener("contextmenu", (e) => {
+//     if (!player.isDead) {
+//       e.preventDefault();
 //     }
-//   }, holdDuration)
+//   // e.preventDefault()
 // })
 
-// board.addEventListener("mouseup", () => {
-//   e.preventDefault()
-//   pressTimer = setTimeout(() => {
-//     if (!player.jumping) {
-//       player.jumping = true
-//     }
-//   }, holdDuration)
-// })
+// // Handle mouse events for jumping
+// // board.addEventListener("mousedown", (e) => {
+// //   e.preventDefault()
+// //   pressTimer = setTimeout(() => {
+// //     if (!player.jumping) {
+// //       player.jumping = true
+// //     }
+// //   }, holdDuration)
+// // })
 
-// board.addEventListener("mouseleave", () => {
-//   clearTimeout(pressTimer)
-//   if (player.jumping) {
-//     const reduceForceGradually = setInterval(() => {
-//       if (player.force > 0.1) {
-//         player.force -= 100
-//       } else {
-//         clearInterval(reduceForceGradually)
-//       }
-//     }, 10)
-//   }
-// })
+// // board.addEventListener("mouseup", () => {
+// //   e.preventDefault()
+// //   pressTimer = setTimeout(() => {
+// //     if (!player.jumping) {
+// //       player.jumping = true
+// //     }
+// //   }, holdDuration)
+// // })
+
+// // board.addEventListener("mouseleave", () => {
+// //   clearTimeout(pressTimer)
+// //   if (player.jumping) {
+// //     const reduceForceGradually = setInterval(() => {
+// //       if (player.force > 0.1) {
+// //         player.force -= 100
+// //       } else {
+// //         clearInterval(reduceForceGradually)
+// //       }
+// //     }, 10)
+// //   }
+// // })
 
 function playJumpSound() {
   if (!audio.paused) {
@@ -556,38 +556,100 @@ function playJumpSound() {
   }
 }
 
-board.addEventListener("touchstart", (e) => {
+// board.addEventListener("touchstart", (e) => {
+//   if (e.target === speaker) {
+//     return
+//   }
+//   if (!player.isDead) {
+//     e.preventDefault()
+//   }
+//   if (player.jumping && character === 'tati') {
+//     player.isFloating = true
+//     }
+//   player.isHolding = true
+
+//   pressTimer = setTimeout(() => {
+//     if (!player.jumping && !player.isDead) {
+//       playJumpSound()
+//       player.jumping = true
+//     }
+//   }, holdDuration)
+// })
+
+// board.addEventListener("touchend", () => {
+//   clearTimeout(pressTimer)
+//   if (player.jumping) {
+//     const reduceForceGradually = setInterval(() => {
+//       if (player.force > 0.01) {
+//         player.force -= 1
+//       } else {
+//         clearInterval(reduceForceGradually)
+//       }
+//     }, 15)
+//   }
+//   player.isHolding = false
+//   player.isFloating = false
+// })
+// }
+let isLongPress = false
+
+board.addEventListener('touchstart', (e) => {
   if (e.target === speaker) {
-    return
+    return;
   }
+  
+  // Prevent default behavior (context menu) on iPhone
   if (!player.isDead) {
-    e.preventDefault()
+    e.preventDefault();
   }
+
+  // Player-specific actions
   if (player.jumping && character === 'tati') {
-    player.isFloating = true
-    }
-  player.isHolding = true
+    player.isFloating = true;
+  }
+  player.isHolding = true;
 
+  // Detect long press for iPhone/Safari
   pressTimer = setTimeout(() => {
+    isLongPress = true;
     if (!player.jumping && !player.isDead) {
-      playJumpSound()
-      player.jumping = true
+      playJumpSound();
+      player.jumping = true;
     }
-  }, holdDuration)
-})
+  }, holdDuration);
+});
 
-board.addEventListener("touchend", () => {
-  clearTimeout(pressTimer)
+// Prevent long-press context menu on iPhone by listening to touchmove
+board.addEventListener('touchmove', (e) => {
+  if (isLongPress) {
+    e.preventDefault(); // Cancel the context menu if long press is detected
+  }
+});
+
+// Handle touchend event
+board.addEventListener('touchend', () => {
+  clearTimeout(pressTimer);
+  isLongPress = false; // Reset the long press flag
+
   if (player.jumping) {
     const reduceForceGradually = setInterval(() => {
       if (player.force > 0.01) {
-        player.force -= 1
+        player.force -= 1;
       } else {
-        clearInterval(reduceForceGradually)
+        clearInterval(reduceForceGradually);
       }
-    }, 15)
+    }, 15);
   }
-  player.isHolding = false
-  player.isFloating = false
-})
+
+  // Reset player state
+  player.isHolding = false;
+  player.isFloating = false;
+  });
+
+  // Add a contextmenu event listener to prevent it on right-click (desktop browsers)
+  board.addEventListener('contextmenu', (e) => {
+    if (!player.isDead) {
+      e.preventDefault();
+    }
+  })
 }
