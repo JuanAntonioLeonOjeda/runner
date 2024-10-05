@@ -33,7 +33,6 @@ const array = Object.values(music)
 
 const isIphone = /iPhone/.test(navigator.userAgent);
 
-console.log(isIphone)
 
 
 // function goFullScreen() {
@@ -510,8 +509,8 @@ function startGame() {
 //       player.jumping = true
 //     }
 //   })
-let pressTimer
-const holdDuration = 1 // Duration in milliseconds to detect a held press
+// let pressTimer
+// const holdDuration = 1 // Duration in milliseconds to detect a held press
 
 // // Prevent the context menu from appearing on long press
 // board.addEventListener("contextmenu", (e) => {
@@ -595,44 +594,49 @@ function playJumpSound() {
 //   player.isFloating = false
 // })
 // }
-let isLongPress = false
+let pressTimer;
+const holdDuration = 500; // Set a reasonable time to detect a long press (e.g., 500ms)
 
-// Handle touchstart with additional logic for iPhone Chrome
+let isLongPress = false;
+
+// Handle touchstart event
 board.addEventListener('touchstart', (e) => {
   if (e.target === speaker) {
     return;
   }
 
-  // Prevent default on iPhone Chrome to avoid context menu
+  // Prevent default on iPhone and Android to avoid context menu
   if (!player.isDead) {
     e.preventDefault();
   }
 
-  // Player-specific actions
-  if (player.jumping && character === 'tati') {
-    player.isFloating = true;
-  }
-  player.isHolding = true;
-
-  // Long press detection
+  // Long press detection (start the timer)
   pressTimer = setTimeout(() => {
     isLongPress = true;
+    // Long press behavior
     if (!player.jumping && !player.isDead) {
       playJumpSound();
       player.jumping = true;
     }
   }, holdDuration);
-}, { passive: false }); 
+  
+  // Immediate jump for short tap
+  if (!player.jumping && !player.isDead && !isLongPress) {
+    playJumpSound();
+    player.jumping = true;
+  }
 
-// Prevent context menu on long touch for iPhone Chrome
-board.addEventListener('touchmove', (e) => {
-    e.preventDefault(); // On movement, prevent the context menu from appearing
 }, { passive: false });
 
-// Handle touchend with passive set to false
+// Prevent default behavior on touchmove
+board.addEventListener('touchmove', (e) => {
+  e.preventDefault(); // Prevent any default behavior during touch movement
+}, { passive: false });
+
+// Handle touchend event
 board.addEventListener('touchend', (e) => {
-  clearTimeout(pressTimer);
-  isLongPress = false;
+  clearTimeout(pressTimer); // Clear the long press timer
+  isLongPress = false; // Reset the long press flag
 
   if (player.jumping) {
     const reduceForceGradually = setInterval(() => {
@@ -654,5 +658,5 @@ board.addEventListener('contextmenu', (e) => {
   if (!player.isDead) {
     e.preventDefault();
   }
-})
+});
 }
