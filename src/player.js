@@ -65,12 +65,12 @@ function Player(character, parent) {
       }
       this.y = Math.max(this.y - this.fallSpeed, 50)
       if (!this.isFloating) {
-        if (character !== 'tati') {
-          this.fallSpeed *= 1.1
-        } else {
-          this.fallSpeed *=1.5
-        }
-        // this.fallSpeed *= 1.1;
+        // if (character !== 'tati') {
+        //   this.fallSpeed *= 1.1
+        // } else {
+        //   this.fallSpeed *=1.5
+        // }
+        this.fallSpeed *= 1.5;
       } else {
         this.fallSpeed = 10
       }
