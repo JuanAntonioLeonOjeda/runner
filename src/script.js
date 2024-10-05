@@ -604,7 +604,7 @@ board.addEventListener('touchstart', (e) => {
   }
 
   // Prevent default on iPhone Chrome to avoid context menu
-  if (!player.isDead && isIphone) {
+  if (!player.isDead) {
     e.preventDefault();
   }
 
@@ -626,9 +626,7 @@ board.addEventListener('touchstart', (e) => {
 
 // Prevent context menu on long touch for iPhone Chrome
 board.addEventListener('touchmove', (e) => {
-  if (isIphone) {
     e.preventDefault(); // On movement, prevent the context menu from appearing
-  }
 }, { passive: false });
 
 // Handle touchend with passive set to false
