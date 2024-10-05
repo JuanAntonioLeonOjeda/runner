@@ -610,6 +610,11 @@ board.addEventListener('touchstart', (e) => {
     e.preventDefault();
   }
 
+  if (player.jumping && character === 'tati') {
+    player.isFloating = true
+  }
+  player.isHolding = true
+
   // Long press detection (start the timer)
   pressTimer = setTimeout(() => {
     isLongPress = true;
