@@ -511,7 +511,10 @@ const holdDuration = 1 // Duration in milliseconds to detect a held press
 
 // Prevent the context menu from appearing on long press
 board.addEventListener("contextmenu", (e) => {
-  e.preventDefault()
+    if (!player.isDead) {
+      e.preventDefault();
+    }
+  // e.preventDefault()
 })
 
 // Handle mouse events for jumping
