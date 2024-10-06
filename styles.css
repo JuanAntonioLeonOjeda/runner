@@ -322,6 +322,7 @@ h3 {
   padding: 2px;
   padding-top: 8px;
   margin-bottom: 5px;
+  font-size: calc(16px + 0.2vw);
 }
 
 .text-container {
@@ -346,7 +347,7 @@ h3 {
   border: 5px solid darkgreen;
   border-radius: 15px;
   position: absolute;
-  top: 10%;
+  top: 5%;
   left: 5%;
   background-color: lightgreen;
 }
@@ -419,4 +420,5 @@ h3 {
   border-radius: 15px;
   padding: 5px 10px;
   border: 3px solid darkgreen;
+  font-size: calc(12px + 0.2vw);
 }
