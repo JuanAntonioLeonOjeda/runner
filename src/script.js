@@ -460,6 +460,8 @@ function startGame() {
     input.value = ''
     const inputSection = document.querySelector('.input')
     const confirm = document.createElement('div')
+    const title = document.querySelector(".title");
+    title.innerText = "Top 5";
     main.removeChild(uploadButton)
     main.removeChild(inputSection)
     confirm.innerHTML = `Estás en ${result + 1}ª posición!`
@@ -470,6 +472,8 @@ function startGame() {
   function loadGameOverScreen () {
     removeChildren(board)
     board.innerHTML = gameOverScreen
+    const title = document.querySelector(".title");
+    title.innerText = "Game Over";
      const input = document.querySelector("#name-input")
      if (!input.value) {
       input.value = localStorage.getItem('user')

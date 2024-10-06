@@ -9,7 +9,6 @@ const gameOverScreen = `
     </section>
     <button id="upload-btn">Subir</button>
     <section class="top-title">
-      Top 5:
       <section class="scores">
       </section>
     </section>
