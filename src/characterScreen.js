@@ -13,7 +13,7 @@ const characterScreen = `
       </div>
      <div id="aux"></div> 
       <div class="text-container">
-        <span class="text">Cae más lento cuando mantienes pulsado</span>
+        <span class="text">Mantén pulsado para flotar al caer</span>
       </div>
     </div>
     <div class="character-select">
