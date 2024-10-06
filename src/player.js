@@ -7,7 +7,7 @@ function Player(character, parent) {
   this.fallSpeed = 30
   this.characterHeight = function() {
     switch(character) {
-      case ('kimchi'): return 45
+      case ('kimchi'): return 50
       case ('tati'): return 70
       default: return 80
     }
