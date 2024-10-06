@@ -30,7 +30,7 @@ h3 {
   max-width: 1000px;
   max-height: 550px;
   background-image: url('./assets/backgrounds/title/title.png');
-  background-size: 100% auto;
+  background-size: 100% 100%;
   background-position: top;
   background-repeat:no-repeat;
   position: relative;
@@ -97,7 +97,7 @@ h3 {
   padding: 20px;
   padding-top: 30px;
   text-align: center;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
   background-color: lightgreen;
   width: fit-content;
   border-radius: 15px;
@@ -141,7 +141,7 @@ h3 {
 }
 
 .text {
-  font-size: calc(10px + 1vw);
+  font-size: calc(12px + 0.2vw);
   line-height: calc(1.1em + 0.5vw);
 }
 
@@ -384,7 +384,7 @@ h3 {
 
 .help-text {
   margin-left: 2%;
-  font-size: calc(16px + 0.2vw);
+  font-size: calc(12px + 0.2vw);
   line-height: calc(1.1em + 0.5vw);
   margin-bottom: 0;
 }
